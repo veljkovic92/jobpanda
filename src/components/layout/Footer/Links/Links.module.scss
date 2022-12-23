@@ -1,0 +1,8 @@
+.links {
+  display: flex;
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+  }
+}

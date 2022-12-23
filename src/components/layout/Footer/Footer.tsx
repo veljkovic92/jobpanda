@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Copyright from "./Copyright/Copyright";
+import Links from "./Links/Links";
 
 const Footer = () => {
   return (
-    <section></section>
-  )
-}
+    <section>
+      <Links />
+      <Copyright />
+    </section>
+  );
+};
 
-export default Footer
+export default Footer;
