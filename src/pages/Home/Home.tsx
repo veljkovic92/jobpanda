@@ -10,8 +10,7 @@ import TopCompanies from "../../components/TopCompanies/TopCompanies";
 const Home = () => {
   return (
     <main>
-      <h1>Find your dream job now</h1>
-      <p>5k+ jobs for you to explore</p>
+      
       <MainSearchBar />
       <SuggestedJobs />
       <JobTypes />

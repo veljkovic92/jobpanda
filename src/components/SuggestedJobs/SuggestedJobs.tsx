@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import classes from "./SuggestedJobs.module.scss";
 
 const SuggestedJobs = () => {
   const responsive = {
@@ -23,16 +24,54 @@ const SuggestedJobs = () => {
     },
   };
   return (
-    <section>
+    <section className={classes["suggested-jobs"]}>
       <h2>Jobs you may be interested in</h2>
       <Carousel responsive={responsive}>
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-        <div>Item 4</div>
-        <div>Item 5</div>
-        <div>Item 6</div>
-        <div>Item 7</div>
+        <div>
+          <img />
+          <h4>Example Job</h4>
+          <span>Company Name</span>
+          <span>Rating</span>
+          <br />
+          <span>Location</span>
+          <span>Experience</span>
+        </div>
+        <div>
+          <img />
+          <h4>Example Job</h4>
+          <span>Company Name</span>
+          <span>Rating</span>
+          <br />
+          <span>Location</span>
+          <span>Experience</span>
+        </div>
+        <div>
+          <img />
+          <h4>Example Job</h4>
+          <span>Company Name</span>
+          <span>Rating</span>
+          <br />
+          <span>Location</span>
+          <span>Experience</span>
+        </div>
+        <div>
+          <img />
+          <h4>Example Job</h4>
+          <span>Company Name</span>
+          <span>Rating</span>
+          <br />
+          <span>Location</span>
+          <span>Experience</span>
+        </div>
+        <div>
+          <img />
+          <h4>Example Job</h4>
+          <span>Company Name</span>
+          <span>Rating</span>
+          <br />
+          <span>Location</span>
+          <span>Experience</span>
+        </div>
       </Carousel>
     </section>
   );

@@ -7,15 +7,35 @@ const Header = () => {
   return (
     <section className={classes.header}>
       <div className={classes["header__header-left"]}>
-        <Link to="/jobs">Jobs</Link>
-        <Link to="/jobs">Companies</Link>
-        <Link to="/jobs">Services</Link>
+        <Link to="/jobs" className={classes["header__header-left--link"]}>
+          Jobs
+        </Link>
+        <Link to="/jobs" className={classes["header__header-left--link"]}>
+          Companies
+        </Link>
+        <Link to="/jobs" className={classes["header__header-left--link"]}>
+          Services
+        </Link>
       </div>
       <div className={classes["header__header-right"]}>
-        <Button variant="outline-primary">Login</Button>
-        <Button variant="outline-danger">Register</Button>
+        <Button
+          variant="outline-primary"
+          className={classes["header__header-right--button"]}
+        >
+          Login
+        </Button>
+        <Button
+          variant="outline-danger"
+          className={classes["header__header-right--button"]}
+        >
+          Register
+        </Button>
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown.Toggle
+            variant="outline-success"
+            id="dropdown-basic"
+            className={classes["header__header-right--button"]}
+          >
             For employers
           </Dropdown.Toggle>
 

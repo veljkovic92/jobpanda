@@ -1,3 +1,16 @@
 .interview {
   display: flex;
+  margin-top: 50px;
+
+  &__left {
+    flex-basis: 25%;
+  }
+
+  &__middle {
+    flex-basis: 37.5%;
+  }
+
+  &__right {
+    flex-basis: 37.5%;
+  }
 }

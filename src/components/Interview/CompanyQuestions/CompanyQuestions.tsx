@@ -7,17 +7,17 @@ const CompanyQuestions = () => {
   return (
     <section>
       <h2>Interview Questions By Company</h2>
-      <Row xs={1} md={2} className="g-4">
+      <Row xs={1} md={2}>
         {Array.from({ length: 6 }).map((_, idx) => (
-          <Col>
+          <Col key={idx}>
             <Card>
               <Card.Img variant="top" src="holder.js/100px160" />
               <Card.Body>
-                <Card.Title>Card title</Card.Title>
+                <Card.Title>Company Name</Card.Title>
                 <Card.Text>
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  1.6k+
+                  <br/>
+                  Interview
                 </Card.Text>
               </Card.Body>
             </Card>

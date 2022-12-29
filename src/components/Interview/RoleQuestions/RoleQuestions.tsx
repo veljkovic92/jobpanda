@@ -7,17 +7,14 @@ const RoleQuestions = () => {
   return (
     <section>
       <h2>Interview questions by role</h2>
-      <Row xs={1} md={2} className="g-4">
+      <Row xs={1} md={1}>
         {Array.from({ length: 4 }).map((_, idx) => (
-          <Col>
+          <Col key={idx}>
             <Card>
-              <Card.Img variant="top" src="holder.js/100px160" />
               <Card.Body>
-                <Card.Title>Card title</Card.Title>
                 <Card.Text>
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  <span>Software Engineer</span>
+                  <span>(7.2K+ questions)</span>
                 </Card.Text>
               </Card.Body>
             </Card>
