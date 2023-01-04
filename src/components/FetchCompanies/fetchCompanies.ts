@@ -1,8 +1,9 @@
 import axios from "axios";
+import { send } from "process";
 import { Dispatch } from "redux";
 import { companiesActions } from "../../store/companies-slice";
 
-interface FetchDataAction {
+export interface FetchDataAction {
   type:
     | "FETCH_DATA_START"
     | "FETCH_DATA_SUCCESS"
@@ -11,25 +12,19 @@ interface FetchDataAction {
   payload?: any;
 }
 
-export const fetchCompanies = () => {
-  
-  
-  return async (dispatch: Dispatch<FetchDataAction>) => {
-    
-    
-    try {
-      
-
-      // dispatch({ type: "FETCH_DATA_START" });
+export const fetchCompanies = async (dispatch: Dispatch<FetchDataAction>) => {
+    const sendRequest = async () => {
       const response = await axios.get<any>(
-        "https://api.thecompaniesapi.com/v1/companies?size=100&token=ahF0qg2s"
+        "https://companies-b1edc-default-rtdb.europe-west1.firebasedatabase.app/companies.json"
       );
 
-      dispatch(companiesActions.addCompanies(response.data));
-      localStorage.setItem("companies", JSON.stringify(response.data));
-      // dispatch({ type: "FETCH_DATA_SUCCESS", payload: response.data });
-    } catch (error) {
-      // dispatch({ type: "FETCH_DATA_ERROR", payload: error });
-    }
+      const companiesData = response.data;
+      console.log(companiesData);
+      return companiesData;
+    };
+    try {
+      const companies = await sendRequest();
+      dispatch(companiesActions.addCompanies(companies));
+    } catch (error) {}
   };
-};
+

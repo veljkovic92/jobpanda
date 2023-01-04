@@ -7,14 +7,20 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import {FetchDataAction} from "./components/FetchCompanies/fetchCompanies"
 
 const App = () => {
+  const dispatch = useDispatch<Dispatch<FetchDataAction>>();
   // const companies = useSelector(
   //   (state: RootState) => state.companies.companies
   // );
-  // useEffect(() => {
-  //   fetchCompanies();
-  // }, []);
+  useEffect(() => {
+    // dispatch(fetchCompanies());
+    fetchCompanies(dispatch)
+
+  }, []);
   // console.log(companies);
   // const [data, setData] = useState(null);
   // async function getUser() {
