@@ -5,6 +5,14 @@ import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
 
 const FeaturedCompanies = () => {
+
+  // const top10 = companiesToSort
+  // .sort((a, b) => a.alexaRank - b.alexaRank)
+  // .slice(0, 10)
+  // .sort(() => 0.5 - Math.random())
+  // .slice(0, 4);
+
+
   return (
     <section className={classes["featured-companies"]}>
       <h2>Featured companies actively hiring</h2>

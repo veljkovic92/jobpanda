@@ -13,18 +13,17 @@ export interface FetchDataAction {
 }
 
 export const fetchCompanies = async (dispatch: Dispatch<FetchDataAction>) => {
-    const sendRequest = async () => {
-      const response = await axios.get<any>(
-        "https://companies-b1edc-default-rtdb.europe-west1.firebasedatabase.app/companies.json"
-      );
+  const sendRequest = async () => {
+    const response = await axios.get<any>(
+      "https://companies-b1edc-default-rtdb.europe-west1.firebasedatabase.app/companies.json"
+    );
 
-      const companiesData = response.data;
-      console.log(companiesData);
-      return companiesData;
-    };
-    try {
-      const companies = await sendRequest();
-      dispatch(companiesActions.addCompanies(companies));
-    } catch (error) {}
+    const companiesData = response.data;
+
+    return companiesData;
   };
-
+  try {
+    const companies = await sendRequest();
+    dispatch(companiesActions.addCompanies(companies));
+  } catch (error) {}
+};

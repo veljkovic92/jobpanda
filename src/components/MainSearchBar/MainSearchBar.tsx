@@ -19,28 +19,26 @@ const MainSearchBar = () => {
   const locationRef = useRef<HTMLInputElement>(null);
 
   type SearchTerms = {
-    skill?: string;
-    experience?: Exclude<string | number | undefined, undefined>;
-    location?: string;
+    skill: string;
+    experience: string | number;
+    location: string;
   };
 
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    const skill = skillRef.current?.value;
+
+    const skill = skillRef.current!.value || "any";
     const experience =
-      experienceRef.current?.value === "Any experience"
+      experienceRef.current!.value === "Any experience"
         ? "any"
-        : typeof experienceRef.current?.value === "string"
-        ? +experienceRef.current?.value
-        : undefined;
-    const location = locationRef.current?.value;
+        : +experienceRef.current!.value;
+    const location = locationRef.current!.value || "any";
 
     const searchTerms: SearchTerms = {
       skill,
       experience,
       location,
     };
-    console.log(searchTerms);
 
     dispatch(searchSliceActions.searchTerm(searchTerms));
   };
@@ -59,8 +57,12 @@ const MainSearchBar = () => {
           placeholder="Enter skills / designations / companies"
           ref={skillRef}
         />
-        <Form.Select aria-label="Default select example" ref={experienceRef}>
-          <option disabled selected hidden>
+        <Form.Select
+          aria-label="Default select example"
+          ref={experienceRef}
+          defaultValue="any"
+        >
+          <option disabled hidden>
             Select experience
           </option>
           <option>Any experience</option>

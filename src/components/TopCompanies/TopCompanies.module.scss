@@ -4,4 +4,12 @@
   &__header {
     margin-bottom: 10px;
   }
+
+  &__card__footer {
+    display: flex;
+    width: 100%;
+    &__img {
+      width: 25%;
+    }
+  }
 }
