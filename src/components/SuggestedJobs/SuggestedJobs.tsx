@@ -24,7 +24,7 @@ const SuggestedJobs = () => {
   const random5 = companiesToShowcase!
     .sort(() => 0.5 - Math.random())
     .slice(0, 5);
-  console.log(random5);
+  
 
   const responsive = {
     superLargeDesktop: {
