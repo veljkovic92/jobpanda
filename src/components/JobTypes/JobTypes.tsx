@@ -11,11 +11,7 @@ const JobTypes = () => {
   const companies = useSelector(
     (state: RootState) => state.companies.companies
   );
-  let companiesToShowcase: Company[];
-
-  if (companies !== undefined) {
-    companiesToShowcase = [...companies];
-  }
+  
   let arrayOfAllIndustries: string[] = [];
 
   if (companies !== undefined) {
