@@ -3,8 +3,20 @@ import classes from "./DiscoverJobs.module.scss";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { showDuplicates } from "../../helpers/allIndustriesFunctions";
+
+// Here you should create a list of 6 most popular jobs and also the button that reroutes the user to the detailed page which lists all of the available jobs
 
 const DiscoverJobs = () => {
+  const companies = useSelector(
+    (state: RootState) => state.companies.companies
+  );
+
+  const duplicates = showDuplicates(companies, "duplicate");
+console.log(duplicates);
+
   return (
     <main className={classes["discover-jobs"]}>
       <section className={classes["discover-jobs__left"]}>
@@ -14,11 +26,11 @@ const DiscoverJobs = () => {
       </section>
       <section className={classes["discover-jobs__right"]}>
         <Row xs={1} md={2} className="g-6">
-          {Array.from({ length: 6 }).map((_, idx) => (
+          {duplicates.map((industry, idx) => (
             <Col key={idx}>
               <Card>
                 <Card.Body>
-                  <Card.Title>Full Stack Developer</Card.Title>
+                  <Card.Title>{industry}</Card.Title>
                   <Card.Text>23.9K+ jobs</Card.Text>
                 </Card.Body>
               </Card>

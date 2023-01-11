@@ -27,7 +27,7 @@ const FeaturedCompanies = () => {
       <CardGroup className={classes[""]}>
         {top4.map((company) => {
           return (
-            <Card>
+            <Card key={company.id}>
               <Card.Img variant="top" src={company.logo} />
               <Card.Body>
                 <Card.Title>{company.name}</Card.Title>
