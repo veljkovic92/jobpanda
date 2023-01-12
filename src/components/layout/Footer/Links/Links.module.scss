@@ -1,8 +1,32 @@
 .links {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 
   &__left {
     display: flex;
     flex-direction: column;
+    flex-basis: 30%;
+    text-align: center;
+    img {
+      width: 80%;
+      margin: auto;
+    }
+    &__icons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+  }
+
+  &__right {
+    flex-basis: 70%;
+
+    &__table {
+      td {
+        border-bottom-width: 0;
+      }
+    }
   }
 }

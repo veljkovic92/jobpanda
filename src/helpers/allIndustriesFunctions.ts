@@ -1,3 +1,4 @@
+import { count } from "console";
 import { Company } from "../store/companies-slice";
 
 const allIndustries = (companies: Company[]) => {
@@ -40,9 +41,15 @@ export const showNonDuplicates = (companies: Company[], type: string) => {
 
 export const showDuplicates = (companies: Company[], type: string) => {
   let industries = allIndustries(companies);
+  let sixPopularIndustries: PopularIndustry[] = [];
+
+  type PopularIndustry = {
+    name: string;
+    count: number;
+  };
 
   if (type === "duplicate") {
-    const popularIndustries: string[] = [];
+    const popularIndustries: PopularIndustry[] = [];
     type Counts = {
       [key: string]: number;
     };
@@ -54,15 +61,16 @@ export const showDuplicates = (companies: Company[], type: string) => {
 
     Object.keys(counts).map((industry) => {
       if (counts[industry] > 15) {
-        popularIndustries.push(
-          industry.charAt(0).toUpperCase() + industry.slice(1)
-        );
+        popularIndustries.push({
+          name: industry.charAt(0).toUpperCase() + industry.slice(1),
+          count: counts[industry],
+        });
       }
     });
     const random6 = popularIndustries!
       .sort(() => 0.5 - Math.random())
       .slice(0, 6);
-    industries = random6;
+    sixPopularIndustries = random6;
   }
-  return industries;
+  return sixPopularIndustries;
 };

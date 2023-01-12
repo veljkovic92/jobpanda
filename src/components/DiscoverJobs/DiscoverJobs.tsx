@@ -13,9 +13,10 @@ const DiscoverJobs = () => {
   const companies = useSelector(
     (state: RootState) => state.companies.companies
   );
-
+  console.log(companies);
+  
   const duplicates = showDuplicates(companies, "duplicate");
-console.log(duplicates);
+
 
   return (
     <main className={classes["discover-jobs"]}>
@@ -30,8 +31,8 @@ console.log(duplicates);
             <Col key={idx}>
               <Card>
                 <Card.Body>
-                  <Card.Title>{industry}</Card.Title>
-                  <Card.Text>23.9K+ jobs</Card.Text>
+                  <Card.Title>{industry.name}</Card.Title>
+                  <Card.Text>{industry.count} jobs</Card.Text>
                 </Card.Body>
               </Card>
             </Col>

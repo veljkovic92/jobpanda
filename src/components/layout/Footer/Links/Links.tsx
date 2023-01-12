@@ -1,6 +1,7 @@
 import React from "react";
-import classes from "./Links.module.scss"
+import classes from "./Links.module.scss";
 import Table from "react-bootstrap/Table";
+import jobpanda from "../../../../assets/jobpanda.png"
 
 import {
   AiFillFacebook,
@@ -11,35 +12,38 @@ import {
 const Links = () => {
   return (
     <main className={classes.links}>
-      <section className={classes["__left"]}>
-        <img />
+      <section className={classes["links__left"]}>
+        <img src={jobpanda}/>
         <span>Connect with us</span>
-        <div>
-        <AiFillFacebook />
-        <AiFillInstagram />
-        <AiFillTwitterSquare />
-        <AiFillLinkedin />
+        <div className={classes["links__left__icons"]}>
+          <AiFillFacebook />
+          <AiFillInstagram />
+          <AiFillTwitterSquare />
+          <AiFillLinkedin />
         </div>
-        
       </section>
-      <section>
-        <Table>
-          <thead></thead>
+      <section className={classes["links__right"]}>
+        <Table className={classes["links__right__table"]}>
           <tbody>
             <tr>
-              <td>Zoran</td>
-              <td>Mark</td>
-              <td>Otto</td>
+              <td>
+                <a>About Us</a>
+              </td>
+              <td>
+                <a>Careers</a>
+              </td>
+              <td>
+                <a>Help Center</a>
+              </td>
             </tr>
             <tr>
-              <td>Zoran</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-            </tr>
-            <tr>
-              <td>Zoran</td>
-              <td>Larry the Bird</td>
-              <td>Batko</td>
+              <td>
+                <a>Terms/Conditions</a>
+              </td>
+              <td>
+                <a>Privacy Policy</a>
+              </td>
+              <td>Report an Issue</td>
             </tr>
           </tbody>
         </Table>

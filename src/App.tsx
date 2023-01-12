@@ -15,7 +15,7 @@ const App = () => {
   const dispatch = useDispatch<Dispatch<FetchDataAction>>();
   // const companies = useSelector(
   //   (state: RootState) => state.companies.companies
-  // );
+// );
   useEffect(() => {
     // dispatch(fetchCompanies());
     fetchCompanies(dispatch)

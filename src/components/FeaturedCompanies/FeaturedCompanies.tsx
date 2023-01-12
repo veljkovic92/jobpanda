@@ -21,6 +21,8 @@ const FeaturedCompanies = () => {
     .sort(() => 0.5 - Math.random())
     .slice(0, 4);
 
+  // Probaj da izvuces ceo ovaj MAP u komponenti i onda u return samo izbacis rezultat
+
   return (
     <section className={classes["featured-companies"]}>
       <h2>Featured companies actively hiring</h2>
@@ -39,7 +41,20 @@ const FeaturedCompanies = () => {
                     <ImPower /> {company.industryMain}
                   </span>
                 </Card.Text>
-                <Card.Text>{company.descriptionShort}</Card.Text>
+                <Card.Text>
+                  {company.descriptionShort
+                    .substring(0, 70)
+                    .substring(
+                      0,
+                      Math.min(
+                        70,
+                        company.descriptionShort
+                          .substring(0, 70)
+                          .lastIndexOf(" ")
+                      )
+                    )
+                    .concat("...")}
+                </Card.Text>
               </Card.Body>
               <Card.Footer>
                 <Button variant="secondary">View Jobs</Button>
