@@ -1,11 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export type SearchType = {
+  experience: string | number;
+  location: string;
+  skill: string
+}
+
+const searchTerms: SearchType = {
+  experience: "any",
+  location: "any",
+  skill: "any"
+};
+
+const initialState = {
+  searchTerms,
+  prevSearches: []
+}
+
 const searchSlice = createSlice({
   name: "searchSlice",
-  initialState: { searchTerm: null, prevSearches: [] },
+  initialState,
   reducers: {
-    searchTerm(state, action) {
-      state.searchTerm = action.payload;
+    searchTerms(state, action) {
+      state.searchTerms = action.payload;
     },
   },
 });

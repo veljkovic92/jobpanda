@@ -7,9 +7,16 @@ import { type } from "@testing-library/user-event/dist/type";
 import { useDispatch } from "react-redux";
 import { searchSliceActions } from "../../store/search-slice";
 import Exclude from "util/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { useNavigate } from "react-router";
 
 const MainSearchBar = () => {
   const dispatch = useDispatch();
+  const numOfCompanies = useSelector(
+    (state: RootState) => state.companies.companies.length
+  );
+  const navigate = useNavigate();
 
   // Da li moze ovaj pristup da se bolje odradi/uprosti.
   // "Null" u useRef, "Exclude" u "SearchTerms" type, i ternary operator koji sadrzi "undefined"
@@ -40,14 +47,15 @@ const MainSearchBar = () => {
       location,
     };
 
-    dispatch(searchSliceActions.searchTerm(searchTerms));
+    dispatch(searchSliceActions.searchTerms(searchTerms));
+    navigate("/results");
   };
 
   return (
     <section className={classes.search}>
       <div className={classes["search__intro"]}>
         <h1>Find your dream job now</h1>
-        <p>5k+ jobs for you to explore</p>
+        <p>{numOfCompanies} jobs for you to explore</p>
       </div>
 
       <Form className={classes["search__form"]} onSubmit={onSubmitHandler}>
