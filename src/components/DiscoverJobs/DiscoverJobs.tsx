@@ -13,10 +13,8 @@ const DiscoverJobs = () => {
   const companies = useSelector(
     (state: RootState) => state.companies.companies
   );
-  console.log(companies);
-  
-  const duplicates = showDuplicates(companies, "duplicate");
 
+  const duplicates = showDuplicates(companies, "duplicate");
 
   return (
     <main className={classes["discover-jobs"]}>

@@ -33,6 +33,7 @@ export type Company = {
   };
   technologies: [];
   technologyCategories: [];
+  totalEmployees: string;
   totalEmployeesExact: number;
   yearFounded: number;
 };
