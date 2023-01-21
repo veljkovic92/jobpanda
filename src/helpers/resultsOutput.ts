@@ -1,6 +1,7 @@
 import React from "react";
 import { Company } from "../store/companies-slice";
 import { SearchType } from "../store/search-slice";
+import jobPandaLogo from "../assets/jobpanda.png";
 
 const resultsOutput = (
   filteredCompanies: Company[],
@@ -40,7 +41,7 @@ const resultsOutput = (
           country: company.country.nameEn,
           continent: company.continent.nameEn,
           domain: company.domain,
-          logo: company.logo,
+          logo: company.logo ||jobPandaLogo,
           desc: company.description,
           descShort: company.descriptionShort,
           experienceWanted: company.experienceWanted,

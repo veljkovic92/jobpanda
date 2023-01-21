@@ -7,6 +7,7 @@ import { ImPower } from "react-icons/im";
 import { IoIosPeople } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import jobPandaLogo from "../../assets/jobpanda.png"
 
 const FeaturedCompanies = () => {
   const companies = useSelector(
@@ -30,7 +31,7 @@ const FeaturedCompanies = () => {
         {top4.map((company) => {
           return (
             <Card key={company.id}>
-              <Card.Img variant="top" src={company.logo} />
+              <Card.Img variant="top" src={company.logo || jobPandaLogo} />
               <Card.Body>
                 <Card.Title>{company.name}</Card.Title>
                 <Card.Text>

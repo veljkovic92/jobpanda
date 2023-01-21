@@ -7,6 +7,7 @@ import { RootState } from "../../store/index";
 import { type } from "@testing-library/user-event/dist/type";
 import { sortCompanies } from "../../helpers/sortCompanies";
 import { sortRandomAndSliceFour } from "../../helpers/sortRandomAndSliceFour";
+import jobPandaLogo from "../../assets/jobpanda.png"
 // Izvuci top 10 kompanija sa najboljom Alexa ocenom i onda izbaci randomnih 4 koje se prikazuju kao Top companies
 
 // izbaci computer-software, finance, machinery, insurance iz industries
@@ -77,7 +78,7 @@ const TopCompanies = () => {
               return (
                 <Card.Img
                   variant="top"
-                  src={company.logo}
+                  src={company.logo || jobPandaLogo}
                   className={classes["top-companies__card__footer__img"]}
                   key={company.id}
                 />

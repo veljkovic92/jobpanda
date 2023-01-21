@@ -8,7 +8,7 @@ import classes from "./SuggestedJobs.module.scss";
 import { GiRank3 } from "react-icons/gi";
 import { GoLocation } from "react-icons/go";
 import { IoIosPeople } from "react-icons/io";
-
+import jobPandaLogo from "../../assets/jobpanda.png"
 // I should make a customized list of suggested jobs depending on each user, depending on what they searched the most
 
 const SuggestedJobs = () => {
@@ -53,7 +53,7 @@ const SuggestedJobs = () => {
         {random5.map((company) => {
           return (
             <div key={company.id}>
-              <img src={company.logo} />
+              <img src={company.logo || jobPandaLogo} />
               <h4>
                 {company.industries[Math.floor(Math.random() * random5.length)]}
               </h4>

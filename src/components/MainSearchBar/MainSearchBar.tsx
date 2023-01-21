@@ -13,9 +13,7 @@ import { useNavigate } from "react-router";
 
 const MainSearchBar = () => {
   const dispatch = useDispatch();
-  const numOfCompanies = useSelector(
-    (state: RootState) => state.companies.companies.length
-  );
+  
   const navigate = useNavigate();
 
   // Da li moze ovaj pristup da se bolje odradi/uprosti.
@@ -53,10 +51,7 @@ const MainSearchBar = () => {
 
   return (
     <section className={classes.search}>
-      <div className={classes["search__intro"]}>
-        <h1>Find your dream job now</h1>
-        <p>{numOfCompanies} jobs for you to explore</p>
-      </div>
+     
 
       <Form className={classes["search__form"]} onSubmit={onSubmitHandler}>
         <BsSearch size="80px" />
