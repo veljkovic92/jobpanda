@@ -17,16 +17,19 @@ const Header = () => {
           Services
         </Link>
       </div>
+      <div className={classes["header__header-middle"]}>
+        <Link to="/" className={classes["header__header-middle__title"]}>JobPanda</Link>
+      </div>
       <div className={classes["header__header-right"]}>
         <Button
           variant="outline-primary"
-          className={classes["header__header-right--button"]}
+          className={classes["header__header-right__button"]}
         >
           Login
         </Button>
         <Button
           variant="outline-danger"
-          className={classes["header__header-right--button"]}
+          className={classes["header__header-right__button"]}
         >
           Register
         </Button>
@@ -34,7 +37,7 @@ const Header = () => {
           <Dropdown.Toggle
             variant="outline-success"
             id="dropdown-basic"
-            className={classes["header__header-right--button"]}
+            className={classes["header__header-right__button"]}
           >
             For employers
           </Dropdown.Toggle>

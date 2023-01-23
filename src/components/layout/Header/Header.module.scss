@@ -14,12 +14,20 @@
     }
   }
 
+  &__header-middle {
+    &__title {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+
   &__header-right {
     display: flex;
     gap: 5px;
 
-    &--button {
-      border-radius: 20px;
+    &__button {
+      border-radius: 10px;
+      padding: 0 10px;
     }
   }
 }

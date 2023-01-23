@@ -2,6 +2,7 @@ import React from "react";
 import { Company } from "../store/companies-slice";
 import { SearchType } from "../store/search-slice";
 import jobPandaLogo from "../assets/jobpanda.png";
+import { useDispatch } from "react-redux";
 
 const resultsOutput = (
   filteredCompanies: Company[],
@@ -20,12 +21,12 @@ const resultsOutput = (
     domain: string;
     logo: string;
     desc: string;
-    descShort: string;
+    descriptionShort: string;
     industry: string;
     experienceWanted: number;
     totalEmployees: string;
     totalEmployeesExact: number;
-    yearFounded: number
+    yearFounded: number;
   };
   const industriesArray: IndustryItem[] = [];
 
@@ -41,15 +42,14 @@ const resultsOutput = (
           country: company.country.nameEn,
           continent: company.continent.nameEn,
           domain: company.domain,
-          logo: company.logo ||jobPandaLogo,
+          logo: company.logo || jobPandaLogo,
           desc: company.description,
-          descShort: company.descriptionShort,
+          descriptionShort: company.descriptionShort,
           experienceWanted: company.experienceWanted,
           totalEmployees: company.totalEmployees,
           totalEmployeesExact: company.totalEmployeesExact,
           yearFounded: company.yearFounded,
           industry: industry,
-          
         });
       });
     });
@@ -59,7 +59,6 @@ const resultsOutput = (
   const shuffledIndustriesArray = industriesArray.sort(function () {
     return Math.random() - 0.5;
   });
-  
 
   return shuffledIndustriesArray;
 };
