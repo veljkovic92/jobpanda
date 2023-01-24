@@ -10,10 +10,14 @@ import Exclude from "util/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useNavigate } from "react-router";
+import { filterCompanies } from "../../helpers/filterCompanies";
+import { jobsSliceActions } from "../../store/jobs-slice";
+import { companiesActions } from "../../store/companies-slice";
+import allJobsList from "../../helpers/allJobsList";
 
 const MainSearchBar = () => {
   const dispatch = useDispatch();
-  
+  const companies = useSelector((state: RootState) => state.companies.companies);
   const navigate = useNavigate();
 
   // Da li moze ovaj pristup da se bolje odradi/uprosti.
@@ -46,6 +50,16 @@ const MainSearchBar = () => {
     };
 
     dispatch(searchSliceActions.searchTerms(searchTerms));
+
+    const filteredCompanies = filterCompanies(companies, searchTerms);
+    dispatch(companiesActions.addFilteredCompanies(filteredCompanies));
+
+    if (skill !== "any" || experience !== "any" || location !== "any") {
+      const specificJobsList = allJobsList(filteredCompanies);
+      dispatch(jobsSliceActions.addSpecificJobs(specificJobsList))
+    }
+    
+
     navigate("/results");
   };
 

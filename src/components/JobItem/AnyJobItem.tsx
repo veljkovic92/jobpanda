@@ -1,36 +1,27 @@
 import { filterCompanies } from "../../helpers/filterCompanies";
-import resultsOutput from "../../helpers/resultsOutput";
+import resultsOutput from "../../helpers/allJobsList";
 import classes from "../../pages/Results/Results.module.scss";
 import { useEffect, useState } from "react";
 import Pagination from "react-paginate";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { jobsSliceActions } from "../../store/jobs-slice";
 
-const AnyJobsMap = () => {
-  const dispatch = useDispatch();
-  const companies = useSelector(
-    (state: RootState) => state.companies.companies
-  );
-  const searchTerms = useSelector(
-    (state: RootState) => state.search.searchTerms
-  );
 
-  const filteredCompanies = filterCompanies(companies, searchTerms);
-  const resultsCompanies = resultsOutput(filteredCompanies, searchTerms);
+const AnyJobItem = () => {
+  
+  const anyJobs = useSelector((state: RootState) => state.jobs.anyJobs);
 
-  useEffect(() => {
-    dispatch(jobsSliceActions.addAnyJobs(resultsCompanies));
-  }, []);
+  
+
+ 
 
   const navigate = useNavigate();
   const onJobClickHandler = (index: number) => {
     navigate(`${index}`);
   };
 
-  const anyJobsMap = resultsCompanies.map((industry, index) => (
+  const anyJobsMap = anyJobs.map((industry, index) => (
     <div
       key={index}
       className={classes.job}
@@ -56,6 +47,8 @@ const AnyJobsMap = () => {
       </div>
     </div>
   ));
+
+  
 
   const [currentPage, setCurrentPage] = useState(0);
   const objectsPerPage = 20;
@@ -89,4 +82,4 @@ const AnyJobsMap = () => {
   );
 };
 
-export default AnyJobsMap;
+export default AnyJobItem;

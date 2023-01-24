@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import MainSearchBar from "../../components/MainSearchBar/MainSearchBar";
-import AnyJobsMap from "../../components/AnyJobsMap/AnyJobsMap";
+import AnyJobsMap from "../../components/JobItem/AnyJobItem";
 import { filterCompanies } from "../../helpers/filterCompanies";
-import resultsOutput from "../../helpers/resultsOutput";
+import resultsOutput from "../../helpers/allJobsList";
 import { RootState } from "../../store";
 import classes from "./Results.module.scss";
 import { useDispatch } from "react-redux";
 import { jobsSliceActions } from "../../store/jobs-slice";
+import AnyJobItem from "../../components/JobItem/AnyJobItem";
+import SpecificJobItem from "../../components/JobItem/SpecificJobItem";
 
 // Ovde trebam da izbacim sve kompanije koje zadovoljavaju search kriterijume
 const Results = () => {
@@ -21,38 +23,24 @@ const Results = () => {
 
   const filteredCompanies = filterCompanies(companies, searchTerms);
 
-  if (searchTerms.skill !== "any" && filteredCompanies) {
-    dispatch(jobsSliceActions.addSpecificJobs(filteredCompanies));
-  }
+  useEffect(() => {
+    if (
+      searchTerms.skill !== "any" ||
+      searchTerms.experience !== "any" ||
+      (searchTerms.location !== "any" && filteredCompanies)
+    ) {
+      dispatch(jobsSliceActions.addSpecificJobs(filteredCompanies));
+    }
+  }, []);
 
-  const specificJobsMap = filteredCompanies.map((company) => (
-    <div key={company.id} className={classes.job}>
-      <div className={classes["job__left"]}>
-        <div className={classes["job__left__header"]}>
-          <h1>{searchTerms.skill}</h1>
-          <p>{company.name}</p>
-        </div>
-        <div className={classes["job__left__body"]}>
-          <p>{company.descriptionShort}</p>
-        </div>
-        <div className={classes["job__left__footer"]}>
-          <p>{company.country.nameEn}</p>
-          <p>{company.city.name}</p>
-          <p>{company.domain}</p>
-        </div>
-      </div>
-      <div className={classes["job__right"]}>
-        <img src={company.logo} className={classes["job__right__image"]} />
-      </div>
-    </div>
-  ));
+  const jobsMap =
+    searchTerms.skill === "any" ? <AnyJobItem /> : <SpecificJobItem />;
+  // ceo div da bude companyItem
 
   return (
     <>
       <MainSearchBar />
-      <div className={classes.jobs}>
-        {searchTerms.skill === "any" ? <AnyJobsMap /> : specificJobsMap}
-      </div>
+      <div className={classes.jobs}>{jobsMap}</div>
     </>
   );
 };

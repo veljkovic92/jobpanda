@@ -40,10 +40,12 @@ export type Company = {
 
 type CompanyState = {
   companies: Company[];
+  filteredCompanies: Company[]
 };
 
 const initialState: CompanyState = {
   companies: [],
+  filteredCompanies: []
 };
 
 const companiesSlice = createSlice({
@@ -53,6 +55,9 @@ const companiesSlice = createSlice({
     addCompanies(state, action) {
       state.companies = action.payload;
     },
+    addFilteredCompanies(state, action) {
+      state.filteredCompanies = action.payload;
+    }
   },
 });
 

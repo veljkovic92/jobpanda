@@ -10,13 +10,26 @@ import { FetchDataAction } from "./components/FetchCompanies/fetchCompanies";
 import Results from "./pages/Results/Results";
 import Jobs from "./pages/Jobs/Jobs";
 import JobDetail from "./pages/JobDetail/JobDetail";
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+import { jobsSliceActions } from "./store/jobs-slice";
+import allJobsList from "./helpers/allJobsList";
 
 const App = () => {
-  const dispatch = useDispatch<Dispatch<FetchDataAction>>();
+  const dispatch = useDispatch();
+  const companies = useSelector((state: RootState) => state.companies.companies);
 
   useEffect(() => {
     fetchCompanies(dispatch);
+    
   }, []);
+
+  useEffect(()=>{
+    if (companies && companies.length > 0) {
+      const allJobs = allJobsList(companies);
+      dispatch(jobsSliceActions.addAnyJobs(allJobs))
+    }
+  },[companies])
 
   return (
     <div className="App">
