@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { SearchType } from "../../store/search-slice";
 import classes from "./JobItem.module.scss";
+import PaginationItem from "./PaginationItem";
 
 const SpecificJobItem = () => {
   const filteredCompanies = useSelector(
@@ -34,7 +35,7 @@ const SpecificJobItem = () => {
     </div>
   ));
 
-  return <div>{specificJobsMap}</div>;
+  return <PaginationItem jobs={filteredCompanies}/>;
 };
 
 export default SpecificJobItem;

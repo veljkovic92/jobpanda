@@ -6,15 +6,10 @@ import Pagination from "react-paginate";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useNavigate } from "react-router";
-
+import PaginationItem from "./PaginationItem";
 
 const AnyJobItem = () => {
-  
   const anyJobs = useSelector((state: RootState) => state.jobs.anyJobs);
-
-  
-
- 
 
   const navigate = useNavigate();
   const onJobClickHandler = (index: number) => {
@@ -48,37 +43,20 @@ const AnyJobItem = () => {
     </div>
   ));
 
-  
+  // const [currentPage, setCurrentPage] = useState(0);
+  // const objectsPerPage = 20;
+  // const totalPages = Math.ceil(anyJobsMap.length / objectsPerPage);
+  // const currentAllJobs = anyJobsMap.slice(
+  //   currentPage * objectsPerPage,
+  //   (currentPage + 1) * objectsPerPage
+  // );
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const objectsPerPage = 20;
-  const totalPages = Math.ceil(anyJobsMap.length / objectsPerPage);
-  const currentAllJobs = anyJobsMap.slice(
-    currentPage * objectsPerPage,
-    (currentPage + 1) * objectsPerPage
-  );
-
-  const handlePageChange = (page: { selected: number }) => {
-    setCurrentPage(page.selected);
-  };
+  // const handlePageChange = (page: { selected: number }) => {
+  //   setCurrentPage(page.selected);
+  // };
 
   return (
-    <>
-      {currentAllJobs}
-      <div className={classes["pagination-container"]}>
-        <Pagination
-          pageCount={totalPages}
-          pageRangeDisplayed={20}
-          marginPagesDisplayed={2}
-          onPageChange={handlePageChange}
-          activeClassName="active"
-          activeLinkClassName="active"
-          containerClassName="pagination"
-          forcePage={currentPage}
-          className={classes.pagination}
-        />
-      </div>
-    </>
+    <PaginationItem jobs={anyJobs}/>
   );
 };
 
