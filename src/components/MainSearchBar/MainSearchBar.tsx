@@ -17,11 +17,10 @@ import allJobsList from "../../helpers/allJobsList";
 
 const MainSearchBar = () => {
   const dispatch = useDispatch();
-  const companies = useSelector((state: RootState) => state.companies.companies);
+  const companies = useSelector(
+    (state: RootState) => state.companies.companies
+  );
   const navigate = useNavigate();
-
-  // Da li moze ovaj pristup da se bolje odradi/uprosti.
-  // "Null" u useRef, "Exclude" u "SearchTerms" type, i ternary operator koji sadrzi "undefined"
 
   const skillRef = useRef<HTMLInputElement>(null);
   const experienceRef = useRef<HTMLSelectElement>(null);
@@ -56,17 +55,14 @@ const MainSearchBar = () => {
 
     if (skill !== "any" || experience !== "any" || location !== "any") {
       const specificJobsList = allJobsList(filteredCompanies);
-      dispatch(jobsSliceActions.addSpecificJobs(specificJobsList))
+      dispatch(jobsSliceActions.addSpecificJobs(specificJobsList));
     }
-    
 
     navigate("/results");
   };
 
   return (
     <section className={classes.search}>
-     
-
       <Form className={classes["search__form"]} onSubmit={onSubmitHandler}>
         <BsSearch size="80px" />
         <Form.Control
