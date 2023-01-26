@@ -23,6 +23,7 @@ const PaginationItem = (props: { jobs: IndustryItem[] | Company[] }) => {
     return "industry" in jobs[0];
   }
   let jobsMap = [];
+  
   if (isIndustryItemArray(props.jobs)) {
     jobsMap = props.jobs.map((industry, index) => (
       <div

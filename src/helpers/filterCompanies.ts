@@ -9,11 +9,11 @@ export const filterCompanies = (
 
   companies.forEach((company) => {
     if (
-      typeof searchTerms.experience == "number" &&
-      company.experienceWanted <= searchTerms.experience
+      searchTerms.experience.length &&
+      company.experienceWanted <= +searchTerms.experience
     ) {
       searchedCompanies.push(company);
-    } else if (typeof searchTerms.experience == "string") {
+    } else if (searchTerms.experience == "") {
       searchedCompanies.push(company);
     }
   });
@@ -22,9 +22,9 @@ export const filterCompanies = (
 
   searchedCompanies.forEach((company) => {
     company.industries.forEach((industry) => {
-      if (searchTerms.skill !== "any" && industry === searchTerms.skill) {
+      if (searchTerms.skill !== "" && industry === searchTerms.skill) {
         searchedCompanies2.push(company);
-      } else if (searchTerms.skill === "any") {
+      } else if (searchTerms.skill === "") {
         searchedCompanies2 = searchedCompanies;
       }
     });
@@ -34,14 +34,43 @@ export const filterCompanies = (
 
   searchedCompanies2.forEach((company) => {
     if (
-      searchTerms.location !== "any" &&
+      searchTerms.location !== "" &&
       company.city.name === searchTerms.location
     ) {
       searchedCompanies3.push(company);
-    } else if (searchTerms.location === "any") {
+    } else if (searchTerms.location === "") {
       searchedCompanies3 = searchedCompanies2;
     }
   });
 
-  return searchedCompanies3;
+  let searchedCompanies4: Company[] = [];
+
+  searchedCompanies3.forEach((company) => {
+    if (
+      searchTerms.company &&
+      searchTerms.company !== "" &&
+      company.name.toLowerCase().startsWith(searchTerms.company.toLowerCase())
+    ) {
+      searchedCompanies4.push(company);
+    } else if (searchTerms.company === "") {
+      searchedCompanies4 = searchedCompanies3;
+    }
+  });
+
+  let searchedCompanies5: Company[] = [];
+
+  searchedCompanies4.forEach((company) => {
+    if (
+      searchTerms.city &&
+      searchTerms.city !== "" &&
+      company.city.name.toLowerCase().startsWith(searchTerms.city.toLowerCase())
+    ) {
+      searchedCompanies5.push(company);
+    } else if (searchTerms.city === "") {
+      searchedCompanies5 = searchedCompanies4;
+    }
+  });
+  console.log(searchedCompanies5);
+
+  return searchedCompanies5;
 };

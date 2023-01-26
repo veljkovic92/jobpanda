@@ -35,7 +35,7 @@ const SpecificJobItem = () => {
     </div>
   ));
 
-  return <PaginationItem jobs={filteredCompanies}/>;
+  return <PaginationItem jobs={filteredCompanies} />;
 };
 
 export default SpecificJobItem;

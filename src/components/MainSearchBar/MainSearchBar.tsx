@@ -5,7 +5,7 @@ import { BsSearch } from "react-icons/bs";
 import React, { useRef, useState } from "react";
 import { type } from "@testing-library/user-event/dist/type";
 import { useDispatch } from "react-redux";
-import { searchSliceActions } from "../../store/search-slice";
+import { searchSliceActions, SearchType } from "../../store/search-slice";
 import Exclude from "util/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
@@ -14,6 +14,8 @@ import { filterCompanies } from "../../helpers/filterCompanies";
 import { jobsSliceActions } from "../../store/jobs-slice";
 import { companiesActions } from "../../store/companies-slice";
 import allJobsList from "../../helpers/allJobsList";
+import { InputGroup } from "react-bootstrap";
+import { GiSettingsKnobs } from "react-icons/gi";
 
 const MainSearchBar = () => {
   const dispatch = useDispatch();
@@ -22,30 +24,21 @@ const MainSearchBar = () => {
   );
   const navigate = useNavigate();
 
-  const skillRef = useRef<HTMLInputElement>(null);
-  const experienceRef = useRef<HTMLSelectElement>(null);
-  const locationRef = useRef<HTMLInputElement>(null);
-
-  type SearchTerms = {
-    skill: string;
-    experience: string | number;
-    location: string;
-  };
+  const [skill, setSkill] = useState("");
+  const [experience, setExperience] = useState("");
+  const [location, setLocation] = useState("");
+  const [company, setCompany] = useState("");
+  const [city, setCity] = useState("");
 
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const skill = skillRef.current!.value || "any";
-    const experience =
-      experienceRef.current!.value === "Any experience"
-        ? "any"
-        : +experienceRef.current!.value;
-    const location = locationRef.current!.value || "any";
-
-    const searchTerms: SearchTerms = {
+    const searchTerms: SearchType = {
       skill,
       experience,
       location,
+      company,
+      city,
     };
 
     dispatch(searchSliceActions.searchTerms(searchTerms));
@@ -53,46 +46,81 @@ const MainSearchBar = () => {
     const filteredCompanies = filterCompanies(companies, searchTerms);
     dispatch(companiesActions.addFilteredCompanies(filteredCompanies));
 
-    if (skill !== "any" || experience !== "any" || location !== "any") {
+    if (skill !== "" || experience !== "" || location !== "") {
       const specificJobsList = allJobsList(filteredCompanies);
       dispatch(jobsSliceActions.addSpecificJobs(specificJobsList));
     }
 
     navigate("/results");
   };
+  const [isMoreFiltersClicked, setIsMoreFiltersClicked] = useState(false);
 
+  // stilizuj reakciju filtera u CSS
   return (
     <section className={classes.search}>
       <Form className={classes["search__form"]} onSubmit={onSubmitHandler}>
-        <BsSearch size="80px" />
-        <Form.Control
-          type="text"
-          placeholder="Enter skills / designations / companies"
-          ref={skillRef}
-        />
-        <Form.Select
-          aria-label="Default select example"
-          ref={experienceRef}
-          defaultValue="any"
-        >
-          <option disabled hidden>
-            Select experience
-          </option>
-          <option>Any experience</option>
-          {Array.from({ length: 30 }, (_, i) => i + 1).map((option) => (
-            <option value={option} key={option}>
-              {option} {option === 1 ? "year" : "years"}
+        <div className={classes["search__form__top"]}>
+          <BsSearch style={{ width: "200px" }} />
+          <Form.Control
+            type="text"
+            placeholder="Enter skills / designations / companies"
+            onChange={(e) => setSkill(e.target.value)}
+            value={skill}
+          />
+          <Form.Select
+            aria-label="Default select example"
+            onChange={(e) => setExperience(e.target.value)}
+            placeholder="Select"
+          >
+            <option disabled selected>
+              Select experience
             </option>
-          ))}
-        </Form.Select>
-        <Form.Control
-          type="text"
-          placeholder="Enter location"
-          ref={locationRef}
-        />
-        <Button variant="primary" type="submit">
-          Search
-        </Button>
+            <option>Any experience</option>
+            {Array.from({ length: 30 }, (_, i) => i + 1).map((option) => (
+              <option value={option} key={option}>
+                {option} {option === 1 ? "year" : "years"}
+              </option>
+            ))}
+          </Form.Select>
+          <Form.Control
+            type="text"
+            placeholder="Enter location"
+            onChange={(e) => setLocation(e.target.value)}
+            value={location}
+          />
+          <Button variant="primary" type="submit">
+            Search
+          </Button>
+          <Button
+            onClick={() => setIsMoreFiltersClicked((prevVal) => !prevVal)}
+          >
+            <GiSettingsKnobs />
+          </Button>
+        </div>
+        <div className={classes["search__form__bot"]}>
+          <div
+            className={`${classes["search__form__bot__more-filters"]}
+              ${
+                isMoreFiltersClicked
+                  ? classes["search__form__bot__more-filters-clicked"]
+                  : ""
+              }
+            `}
+          >
+            <Form.Control
+              type="text"
+              placeholder="Enter Company"
+              onChange={(e) => setCompany(e.target.value)}
+              value={company}
+            />
+            <Form.Control
+              type="text"
+              placeholder="Enter City"
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+            />
+          </div>
+        </div>
       </Form>
     </section>
   );

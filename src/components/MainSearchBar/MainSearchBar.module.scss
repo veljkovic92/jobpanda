@@ -1,12 +1,26 @@
 .search {
   margin-top: 20px;
 
- 
-
   &__form {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+    &__top {
+      display: flex;
+      align-items: center;
+    }
+
+    &__bot {
+      &__more-filters {
+        display: none;
+      }
+
+      &__more-filters-clicked {
+        display: flex;
+      }
+    }
   }
 }
