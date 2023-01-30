@@ -28,6 +28,15 @@ const searchSlice = createSlice({
     searchTerms(state, action) {
       state.searchTerms = action.payload;
     },
+    addSkillFilter(state, action) {
+      state.searchTerms.skill = action.payload
+    },
+    addExperienceFilter(state, action) {
+      state.searchTerms.experience = action.payload;
+    },
+    addLocationFilter(state, action) {
+      state.searchTerms.location =  action.payload
+    },
     addCompanyFilter(state, action) {
       state.searchTerms.company = action.payload;
     },

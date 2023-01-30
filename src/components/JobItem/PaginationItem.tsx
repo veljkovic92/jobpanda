@@ -22,57 +22,61 @@ const PaginationItem = (props: { jobs: IndustryItem[] | Company[] }) => {
   ): jobs is IndustryItem[] {
     return "industry" in jobs[0];
   }
-  let jobsMap = [];
-  
-  if (isIndustryItemArray(props.jobs)) {
-    jobsMap = props.jobs.map((industry, index) => (
-      <div
-        key={index}
-        className={classes.job}
-        onClick={() => onJobClickHandler(index)}
-      >
-        <div className={classes["job__left"]}>
-          <div className={classes["job__left__header"]}>
-            <h1>{industry.industry}</h1>
-            <p>{industry.name}</p>
-          </div>
+  let jobsMap: JSX.Element[] = [];
 
-          <div className={classes["job__left__body"]}>
-            <p>{industry.descriptionShort}</p>
+  if (props.jobs && props.jobs.length) {
+    if (isIndustryItemArray(props.jobs)) {
+      console.log("zoki");
+
+      jobsMap = props.jobs.map((industry, index) => (
+        <div
+          key={index}
+          className={classes.job}
+          onClick={() => onJobClickHandler(index)}
+        >
+          <div className={classes["job__left"]}>
+            <div className={classes["job__left__header"]}>
+              <h1>{industry.industry}</h1>
+              <p>{industry.name}</p>
+            </div>
+
+            <div className={classes["job__left__body"]}>
+              <p>{industry.descriptionShort}</p>
+            </div>
+            <div className={classes["job__left__footer"]}>
+              <p>{industry.country}</p>
+              <p>{industry.city}</p>
+              <p>{industry.domain}</p>
+            </div>
           </div>
-          <div className={classes["job__left__footer"]}>
-            <p>{industry.country}</p>
-            <p>{industry.city}</p>
-            <p>{industry.domain}</p>
-          </div>
-        </div>
-        <div className={classes["job__right"]}>
-          <img src={industry.logo} className={classes["job__right__image"]} />
-        </div>
-      </div>
-    ));
-  } else {
-    jobsMap = props.jobs.map((company) => (
-      <div key={company.id} className={classes.job}>
-        <div className={classes["job__left"]}>
-          <div className={classes["job__left__header"]}>
-            <h1>{searchTerms.skill}</h1>
-            <p>{company.name}</p>
-          </div>
-          <div className={classes["job__left__body"]}>
-            <p>{company.descriptionShort}</p>
-          </div>
-          <div className={classes["job__left__footer"]}>
-            <p>{company.country.nameEn}</p>
-            <p>{company.city.name}</p>
-            <p>{company.domain}</p>
+          <div className={classes["job__right"]}>
+            <img src={industry.logo} className={classes["job__right__image"]} />
           </div>
         </div>
-        <div className={classes["job__right"]}>
-          <img src={company.logo} className={classes["job__right__image"]} />
+      ));
+    } else {
+      jobsMap = props.jobs.map((company) => (
+        <div key={company.id} className={classes.job}>
+          <div className={classes["job__left"]}>
+            <div className={classes["job__left__header"]}>
+              <h1>{searchTerms.skill}</h1>
+              <p>{company.name}</p>
+            </div>
+            <div className={classes["job__left__body"]}>
+              <p>{company.descriptionShort}</p>
+            </div>
+            <div className={classes["job__left__footer"]}>
+              <p>{company.country.nameEn}</p>
+              <p>{company.city.name}</p>
+              <p>{company.domain}</p>
+            </div>
+          </div>
+          <div className={classes["job__right"]}>
+            <img src={company.logo} className={classes["job__right__image"]} />
+          </div>
         </div>
-      </div>
-    ));
+      ));
+    }
   }
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -86,25 +90,28 @@ const PaginationItem = (props: { jobs: IndustryItem[] | Company[] }) => {
   const handlePageChange = (page: { selected: number }) => {
     setCurrentPage(page.selected);
   };
-  return (
+  return props.jobs && props.jobs.length ? (
     <>
       {currentAllJobs}
-      <div className={classes["pagination-container"]}>
-        <Pagination
-          pageCount={totalPages}
-          pageRangeDisplayed={20}
-          marginPagesDisplayed={2}
-          onPageChange={handlePageChange}
-          activeClassName="active"
-          activeLinkClassName="active"
-          containerClassName="pagination"
-          forcePage={currentPage}
-          className={classes.pagination}
-        />
-      </div>
+      {props.jobs.length > 20 && (
+        <div className={classes["pagination-container"]}>
+          <Pagination
+            pageCount={totalPages}
+            pageRangeDisplayed={20}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageChange}
+            activeClassName="active"
+            activeLinkClassName="active"
+            containerClassName="pagination"
+            forcePage={currentPage}
+            className={classes.pagination}
+          />
+        </div>
+      )}
     </>
+  ) : (
+    <p>"No Jobs Found"</p>
   );
 };
 
 export default PaginationItem;
-// put Pagination also for SpecificJobItem

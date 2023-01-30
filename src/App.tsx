@@ -17,19 +17,23 @@ import allJobsList from "./helpers/allJobsList";
 
 const App = () => {
   const dispatch = useDispatch();
-  const companies = useSelector((state: RootState) => state.companies.companies);
+  const companies = useSelector(
+    (state: RootState) => state.companies.companies
+  );
+  const searchTerms = useSelector(
+    (state: RootState) => state.search.searchTerms
+  );
 
   useEffect(() => {
     fetchCompanies(dispatch);
-    
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (companies && companies.length > 0) {
-      const allJobs = allJobsList(companies);
-      dispatch(jobsSliceActions.addAnyJobs(allJobs))
+      const allJobs = allJobsList(companies, searchTerms);
+      dispatch(jobsSliceActions.addAnyJobs(allJobs));
     }
-  },[companies])
+  }, [companies, searchTerms]);
 
   return (
     <div className="App">

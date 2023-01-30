@@ -17,7 +17,7 @@ export type Company = {
   domain: string;
   experienceWanted: number;
   id: number;
-  industries: [];
+  industries: string[];
   industryMain: string;
   logo: string;
   monthlyVisitors: string;

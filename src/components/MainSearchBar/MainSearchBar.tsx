@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import classes from "./MainSearchBar.module.scss";
 import { BsSearch } from "react-icons/bs";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { type } from "@testing-library/user-event/dist/type";
 import { useDispatch } from "react-redux";
 import { searchSliceActions, SearchType } from "../../store/search-slice";
@@ -22,13 +22,58 @@ const MainSearchBar = () => {
   const companies = useSelector(
     (state: RootState) => state.companies.companies
   );
+  const {
+    skill: localSkill,
+    experience: localExperience,
+    location: localLocation,
+    company: localCompany,
+    city: localCity,
+  } = useSelector((state: RootState) => state.search.searchTerms);
+
   const navigate = useNavigate();
 
-  const [skill, setSkill] = useState("");
-  const [experience, setExperience] = useState("");
-  const [location, setLocation] = useState("");
-  const [company, setCompany] = useState("");
-  const [city, setCity] = useState("");
+  const [skill, setSkill] = useState(localSkill);
+  const [experience, setExperience] = useState(localExperience);
+  const [location, setLocation] = useState(localLocation);
+  const [company, setCompany] = useState(localCompany);
+  const [city, setCity] = useState(localCity);
+
+  // Ovde trebas da dodas svaki onChangeHandler umesto inline dole u tsx code da bude ovde, da bi na svaki change se update npr. skill kroz setSkill i plus dispatch promena direktno u Redux state. Ovo sve da bi state ostao uvek up to date sa promenama direktno.
+  const onSkillChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const skill = event.target.value;
+    setSkill(skill);
+    dispatch(searchSliceActions.addSkillFilter(skill));
+  };
+
+  const onExperienceChangeHandler = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const experience = event.target.value;
+    setExperience(experience);
+    dispatch(searchSliceActions.addExperienceFilter(experience));
+  };
+
+  const onLocationChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const location = event.target.value;
+    setLocation(location);
+    dispatch(searchSliceActions.addLocationFilter(location));
+  };
+
+  const onCompanyChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const company = event.target.value;
+    setCompany(company);
+    dispatch(searchSliceActions.addCompanyFilter(company));
+  };
+
+  const onCityChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const city = event.target.value;
+    setCity(city);
+    dispatch(searchSliceActions.addCityFilter(city));
+  };
 
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -45,9 +90,16 @@ const MainSearchBar = () => {
 
     const filteredCompanies = filterCompanies(companies, searchTerms);
     dispatch(companiesActions.addFilteredCompanies(filteredCompanies));
-
-    if (skill !== "" || experience !== "" || location !== "") {
-      const specificJobsList = allJobsList(filteredCompanies);
+    // Ova logika ispod dodaje pravi listu o specificnim poslovima na osnovu liste filtriranih kompanija. To je problem jer ukoliko imam npr. filter za "skill" onda se on ne uzima u obzir vec se sve kompanije mapiraju i svi poslovi renderuju. Meni treba da ponovo predje filter kroz filtered companies i da uporedi sta postoji od filtera i ostavi samo one jobs u specificJobsList koji se slazu sa filterom.
+    if (
+      skill !== "" ||
+      experience !== "" ||
+      !isNaN(+experience) ||
+      location !== "" ||
+      company !== "" ||
+      city !== ""
+    ) {
+      const specificJobsList = allJobsList(filteredCompanies, searchTerms);
       dispatch(jobsSliceActions.addSpecificJobs(specificJobsList));
     }
 
@@ -56,6 +108,7 @@ const MainSearchBar = () => {
   const [isMoreFiltersClicked, setIsMoreFiltersClicked] = useState(false);
 
   // stilizuj reakciju filtera u CSS
+  // Napravi da experience se pokazuje na onaj koji je odabran na reroute i refresh
   return (
     <section className={classes.search}>
       <Form className={classes["search__form"]} onSubmit={onSubmitHandler}>
@@ -64,17 +117,19 @@ const MainSearchBar = () => {
           <Form.Control
             type="text"
             placeholder="Enter skills / designations / companies"
-            onChange={(e) => setSkill(e.target.value)}
+            onChange={onSkillChangeHandler}
             value={skill}
           />
           <Form.Select
             aria-label="Default select example"
-            onChange={(e) => setExperience(e.target.value)}
-            placeholder="Select"
+            onChange={onExperienceChangeHandler}
           >
-            <option disabled selected>
-              Select experience
-            </option>
+            {experience ? (
+              <option disabled selected>{experience} years</option>
+            ) : (
+              <option disabled selected>Select experience</option>
+            )}
+
             <option>Any experience</option>
             {Array.from({ length: 30 }, (_, i) => i + 1).map((option) => (
               <option value={option} key={option}>
@@ -85,7 +140,7 @@ const MainSearchBar = () => {
           <Form.Control
             type="text"
             placeholder="Enter location"
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={onLocationChangeHandler}
             value={location}
           />
           <Button variant="primary" type="submit">
@@ -110,13 +165,13 @@ const MainSearchBar = () => {
             <Form.Control
               type="text"
               placeholder="Enter Company"
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={onCompanyChangeHandler}
               value={company}
             />
             <Form.Control
               type="text"
               placeholder="Enter City"
-              onChange={(e) => setCity(e.target.value)}
+              onChange={onCityChangeHandler}
               value={city}
             />
           </div>

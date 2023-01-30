@@ -11,7 +11,15 @@ const Results = () => {
   );
 
   const jobsMap =
-    searchTerms.skill === "" ? <AnyJobItem /> : <SpecificJobItem />;
+    searchTerms.skill === "" &&
+    searchTerms.experience === "" &&
+    searchTerms.location === "" &&
+    searchTerms.company === "" &&
+    searchTerms.city === "" ? (
+      <AnyJobItem />
+    ) : (
+      <SpecificJobItem />
+    );
 
   return (
     <>

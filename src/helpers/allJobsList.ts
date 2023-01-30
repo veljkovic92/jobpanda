@@ -4,10 +4,10 @@ import { SearchType } from "../store/search-slice";
 import jobPandaLogo from "../assets/jobpanda.png";
 import { IndustryItem } from "../store/jobs-slice";
 
-const allJobsList = (filteredCompanies: Company[]) => {
+const allJobsList = (filteredCompanies: Company[], searchTerms: SearchType) => {
   console.log(filteredCompanies);
 
-  const industriesArray: IndustryItem[] = [];
+  let industriesArray: IndustryItem[] = [];
 
   filteredCompanies.forEach((company) => {
     company.industries.forEach((industry) => {
@@ -31,6 +31,36 @@ const allJobsList = (filteredCompanies: Company[]) => {
       });
     });
   });
+
+  if (searchTerms.experience !== "" && !isNaN(+searchTerms.experience)) {
+    industriesArray = industriesArray.filter(
+      (company) => company.experienceWanted <= +searchTerms.experience
+    );
+  }
+
+  if (searchTerms.skill !== "") {
+    industriesArray = industriesArray.filter(
+      (company) => company.industry === searchTerms.skill
+    );
+  }
+
+  if (searchTerms.location !== "") {
+    industriesArray = industriesArray.filter(
+      (company) => company.city === searchTerms.location
+    );
+  }
+
+  if (searchTerms.company !== "") {
+    industriesArray = industriesArray.filter((company) =>
+      company.name.toLowerCase().startsWith(searchTerms.company.toLowerCase())
+    );
+  }
+
+  if (searchTerms.city !== "") {
+    industriesArray = industriesArray.filter((company) =>
+      company.city.toLowerCase().startsWith(searchTerms.city.toLowerCase())
+    );
+  }
 
   // izbrisi da se uvek shuffle uradi i to dodaj kao opciju na svaki list industrija (sortiranje)
   console.log(industriesArray);
