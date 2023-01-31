@@ -11,13 +11,21 @@
     &--link {
       text-decoration: none;
       color: inherit;
+
+      &__active {
+        text-decoration: underline;
+        text-decoration-thickness: 5px;
+        text-decoration-skip-ink: none;
+      }
     }
   }
 
   &__header-middle {
-    &__title {
-      text-decoration: none;
-      color: blue;
+    text-decoration: none;
+    color: inherit;
+    &__active {
+      text-decoration: underline;
+      text-decoration-thickness: 5px;
     }
   }
 

@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store";
 import { jobsSliceActions } from "./store/jobs-slice";
 import allJobsList from "./helpers/allJobsList";
+import Companies from "./pages/Companies/Companies";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/results" element={<Results />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:jobId" element={<JobDetail />} />
+          <Route path="/companies" element={<Companies />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>

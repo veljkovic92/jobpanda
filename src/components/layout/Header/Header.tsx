@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import classes from "./Header.module.scss";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -7,18 +7,48 @@ const Header = () => {
   return (
     <section className={classes.header}>
       <div className={classes["header__header-left"]}>
-        <Link to="/jobs" className={classes["header__header-left--link"]}>
+        <NavLink
+          to="/jobs"
+          className={({ isActive }) =>
+            isActive
+              ? `${classes["header__header-left--link__active"]} ${classes["header__header-left--link"]}`
+              : classes["header__header-left--link"]
+          }
+        >
           Jobs
-        </Link>
-        <Link to="/jobs" className={classes["header__header-left--link"]}>
+        </NavLink>
+        <NavLink
+          to="/companies"
+          className={({ isActive }) =>
+            isActive
+              ? `${classes["header__header-left--link__active"]} ${classes["header__header-left--link"]}`
+              : classes["header__header-left--link"]
+          }
+        >
           Companies
-        </Link>
-        <Link to="/jobs" className={classes["header__header-left--link"]}>
+        </NavLink>
+        <NavLink
+          to="/services"
+          className={({ isActive }) =>
+            isActive
+              ? `${classes["header__header-left--link__active"]} ${classes["header__header-left--link"]}`
+              : classes["header__header-left--link"]
+          }
+        >
           Services
-        </Link>
+        </NavLink>
       </div>
       <div className={classes["header__header-middle"]}>
-        <Link to="/" className={classes["header__header-middle__title"]}>JobPanda</Link>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? `${classes["header__header-middle__active"]} ${classes["header__header-middle"]}`
+              : classes["header__header-middle"]
+          }
+        >
+          JobPanda
+        </NavLink>
       </div>
       <div className={classes["header__header-right"]}>
         <Button
