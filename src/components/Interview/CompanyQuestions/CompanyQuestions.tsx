@@ -16,7 +16,7 @@ const CompanyQuestions = () => {
                 <Card.Title>Company Name</Card.Title>
                 <Card.Text>
                   1.6k+
-                  <br/>
+                  <br />
                   Interview
                 </Card.Text>
               </Card.Body>
@@ -28,4 +28,4 @@ const CompanyQuestions = () => {
   );
 };
 
-export default CompanyQuestions;
+export default React.memo(CompanyQuestions);

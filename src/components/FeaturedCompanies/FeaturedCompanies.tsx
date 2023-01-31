@@ -77,4 +77,4 @@ const FeaturedCompanies = () => {
   );
 };
 
-export default FeaturedCompanies;
+export default React.memo(FeaturedCompanies);

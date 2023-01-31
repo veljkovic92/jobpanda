@@ -8,7 +8,7 @@ import classes from "./SuggestedJobs.module.scss";
 import { GiRank3 } from "react-icons/gi";
 import { GoLocation } from "react-icons/go";
 import { IoIosPeople } from "react-icons/io";
-import jobPandaLogo from "../../assets/jobpanda.png"
+import jobPandaLogo from "../../assets/jobpanda.png";
 // I should make a customized list of suggested jobs depending on each user, depending on what they searched the most
 
 const SuggestedJobs = () => {
@@ -24,7 +24,6 @@ const SuggestedJobs = () => {
   const random5 = companiesToShowcase!
     .sort(() => 0.5 - Math.random())
     .slice(0, 5);
-  
 
   const responsive = {
     superLargeDesktop: {
@@ -76,4 +75,4 @@ const SuggestedJobs = () => {
   );
 };
 
-export default SuggestedJobs;
+export default React.memo(SuggestedJobs);

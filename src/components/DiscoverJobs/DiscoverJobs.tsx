@@ -41,4 +41,4 @@ const DiscoverJobs = () => {
   );
 };
 
-export default DiscoverJobs;
+export default React.memo(DiscoverJobs);

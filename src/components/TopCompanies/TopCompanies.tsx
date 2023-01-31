@@ -7,7 +7,7 @@ import { RootState } from "../../store/index";
 import { type } from "@testing-library/user-event/dist/type";
 import { sortCompanies } from "../../helpers/sortCompanies";
 import { sortRandomAndSliceFour } from "../../helpers/sortRandomAndSliceFour";
-import jobPandaLogo from "../../assets/jobpanda.png"
+import jobPandaLogo from "../../assets/jobpanda.png";
 // Izvuci top 10 kompanija sa najboljom Alexa ocenom i onda izbaci randomnih 4 koje se prikazuju kao Top companies
 
 // izbaci computer-software, finance, machinery, insurance iz industries
@@ -84,7 +84,6 @@ const TopCompanies = () => {
                 />
               );
             })}
-           
           </Card.Footer>
         </Card>
         <Card>
@@ -95,7 +94,7 @@ const TopCompanies = () => {
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-          {featuredTopMachineryCompanies.map((company) => {
+            {featuredTopMachineryCompanies.map((company) => {
               return (
                 <Card.Img
                   variant="top"
@@ -115,7 +114,7 @@ const TopCompanies = () => {
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-          {featuredTopIndustryCompanies.map((company) => {
+            {featuredTopIndustryCompanies.map((company) => {
               return (
                 <Card.Img
                   variant="top"
@@ -132,4 +131,4 @@ const TopCompanies = () => {
   );
 };
 
-export default TopCompanies;
+export default React.memo(TopCompanies);

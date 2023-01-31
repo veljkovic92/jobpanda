@@ -23,4 +23,4 @@ const Interview = () => {
   );
 };
 
-export default Interview;
+export default React.memo(Interview);

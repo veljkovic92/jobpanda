@@ -65,12 +65,12 @@ const allJobsList = (filteredCompanies: Company[], searchTerms: SearchType) => {
   }
 
   // izbrisi da se uvek shuffle uradi i to dodaj kao opciju na svaki list industrija (sortiranje)
-  console.log(industriesArray);
+ 
   const shuffledJobsArray = industriesArray.sort(function () {
     return Math.random() - 0.5;
   });
 
-  return shuffledJobsArray;
+  return industriesArray;
 };
 
 export default allJobsList;

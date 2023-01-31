@@ -51,12 +51,15 @@ const Header = () => {
         </NavLink>
       </div>
       <div className={classes["header__header-right"]}>
-        <Button
-          variant="outline-primary"
-          className={classes["header__header-right__button"]}
-        >
-          Login
-        </Button>
+        <NavLink to="/login">
+          <Button
+            variant="outline-primary"
+            className={classes["header__header-right__button"]}
+          >
+            Login
+          </Button>
+        </NavLink>
+
         <Button
           variant="outline-danger"
           className={classes["header__header-right__button"]}

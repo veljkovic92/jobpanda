@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Company } from "../../store/companies-slice";
@@ -34,7 +34,7 @@ const JobTypes = () => {
   //   .sort(() => 0.5 - Math.random())
   //   .slice(0, 10);
 
-  const random10: string[] = showNonDuplicates(companies, "non-duplicate");
+  const random10 = useMemo(() => showNonDuplicates(companies, "non-duplicate"), [companies]);
 
   return (
     <section className={classes["job-types"]}>
@@ -48,4 +48,4 @@ const JobTypes = () => {
   );
 };
 
-export default JobTypes;
+export default React.memo(JobTypes);
