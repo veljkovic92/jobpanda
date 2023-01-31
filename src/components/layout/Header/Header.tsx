@@ -59,13 +59,15 @@ const Header = () => {
             Login
           </Button>
         </NavLink>
+        <NavLink to="/register">
+          <Button
+            variant="outline-danger"
+            className={classes["header__header-right__button"]}
+          >
+            Register
+          </Button>
+        </NavLink>
 
-        <Button
-          variant="outline-danger"
-          className={classes["header__header-right__button"]}
-        >
-          Register
-        </Button>
         <Dropdown>
           <Dropdown.Toggle
             variant="outline-success"

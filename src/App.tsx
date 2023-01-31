@@ -1,7 +1,7 @@
 import Layout from "./components/layout/Layout";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 import { fetchCompanies } from "./components/FetchCompanies/fetchCompanies";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ import { RootState } from "./store";
 import { jobsSliceActions } from "./store/jobs-slice";
 import allJobsList from "./helpers/allJobsList";
 import Companies from "./pages/Companies/Companies";
+import Register from "./pages/Register/Register";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/jobs/:jobId" element={<JobDetail />} />
           <Route path="/companies" element={<Companies />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Layout>
     </div>

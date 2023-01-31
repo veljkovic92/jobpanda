@@ -1,0 +1,29 @@
+.login {
+  &__body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    &__left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-basis: 60%;
+
+      img {
+        width: 75%;
+      }
+      &__list {
+        list-style: none;
+
+        li:before {
+          content: "✓";
+          color: green;
+        }
+      }
+    }
+    &__right {
+      flex-basis: 40%;
+    }
+  }
+}
