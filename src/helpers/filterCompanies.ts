@@ -83,33 +83,35 @@ export const filterCompanies = (
 
   if (searchTerms.experience !== "" && !isNaN(+searchTerms.experience)) {
     filteredCompanies = filteredCompanies.filter(
-      company => company.experienceWanted <= +searchTerms.experience
+      (company) => company.experienceWanted <= +searchTerms.experience
     );
   }
 
   if (searchTerms.skill !== "") {
-    filteredCompanies = filteredCompanies.filter(
-      company => company.industries.includes(searchTerms.skill)
-    );
+    filteredCompanies = filteredCompanies.filter((company) => {
+      return company.industries.find((skill) =>
+        skill.toLowerCase().startsWith(searchTerms.skill.toLowerCase())
+      );
+    });
   }
 
-  if (searchTerms.location !== "") {
-    filteredCompanies = filteredCompanies.filter(
-      company => company.city.name === searchTerms.location
+  if (searchTerms.country !== "") {
+    filteredCompanies = filteredCompanies.filter((company) =>
+      company.country.nameEn
+        .toLowerCase()
+        .startsWith(searchTerms.country.toLowerCase())
     );
   }
 
   if (searchTerms.company !== "") {
-    filteredCompanies = filteredCompanies.filter(
-      company =>
-        company.name.toLowerCase().startsWith(searchTerms.company.toLowerCase())
+    filteredCompanies = filteredCompanies.filter((company) =>
+      company.name.toLowerCase().startsWith(searchTerms.company.toLowerCase())
     );
   }
 
   if (searchTerms.city !== "") {
-    filteredCompanies = filteredCompanies.filter(
-      company =>
-        company.city.name.toLowerCase().startsWith(searchTerms.city.toLowerCase())
+    filteredCompanies = filteredCompanies.filter((company) =>
+      company.city.name.toLowerCase().startsWith(searchTerms.city.toLowerCase())
     );
   }
 

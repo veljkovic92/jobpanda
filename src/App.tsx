@@ -28,12 +28,12 @@ const App = () => {
     fetchCompanies(dispatch);
   }, []);
 
-  useEffect(() => {
-    if (companies && companies.length > 0) {
-      const allJobs = allJobsList(companies, searchTerms);
-      dispatch(jobsSliceActions.addAnyJobs(allJobs));
-    }
-  }, [companies, searchTerms]);
+  // useEffect(() => {
+  //   if (companies && companies.length > 0) {
+  //     const allJobs = allJobsList(companies, searchTerms);
+  //     dispatch(jobsSliceActions.addAnyJobs(allJobs));
+  //   }
+  // }, [companies, searchTerms]);
 
   return (
     <div className="App">

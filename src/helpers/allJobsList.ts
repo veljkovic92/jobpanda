@@ -39,14 +39,16 @@ const allJobsList = (filteredCompanies: Company[], searchTerms: SearchType) => {
   }
 
   if (searchTerms.skill !== "") {
-    industriesArray = industriesArray.filter(
-      (company) => company.industry === searchTerms.skill
+    industriesArray = industriesArray.filter((company) =>
+      company.industry.toLowerCase().startsWith(searchTerms.skill.toLowerCase())
     );
   }
 
-  if (searchTerms.location !== "") {
-    industriesArray = industriesArray.filter(
-      (company) => company.city === searchTerms.location
+  if (searchTerms.country !== "") {
+    industriesArray = industriesArray.filter((company) =>
+      company.country
+        .toLowerCase()
+        .startsWith(searchTerms.country.toLowerCase())
     );
   }
 

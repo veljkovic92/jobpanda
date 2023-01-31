@@ -2,24 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export type SearchType = {
   experience: string;
-  location: string;
+  country: string;
   skill: string;
   company: string;
   city: string;
-}
+};
 
 const searchTerms: SearchType = {
   experience: "any",
-  location: "any",
+  country: "any",
   skill: "any",
   company: "any",
-  city: "any"
+  city: "any",
 };
 
 const initialState = {
   searchTerms,
-  prevSearches: []
-}
+  prevSearches: [],
+};
 
 const searchSlice = createSlice({
   name: "searchSlice",
@@ -29,20 +29,20 @@ const searchSlice = createSlice({
       state.searchTerms = action.payload;
     },
     addSkillFilter(state, action) {
-      state.searchTerms.skill = action.payload
+      state.searchTerms.skill = action.payload;
     },
     addExperienceFilter(state, action) {
       state.searchTerms.experience = action.payload;
     },
-    addLocationFilter(state, action) {
-      state.searchTerms.location =  action.payload
+    addCountryFilter(state, action) {
+      state.searchTerms.country = action.payload;
     },
     addCompanyFilter(state, action) {
       state.searchTerms.company = action.payload;
     },
     addCityFilter(state, action) {
       state.searchTerms.city = action.payload;
-    }
+    },
   },
 });
 

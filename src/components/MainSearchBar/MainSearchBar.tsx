@@ -25,7 +25,7 @@ const MainSearchBar = () => {
   const {
     skill: localSkill,
     experience: localExperience,
-    location: localLocation,
+    country: localCountry,
     company: localCompany,
     city: localCity,
   } = useSelector((state: RootState) => state.search.searchTerms);
@@ -34,7 +34,7 @@ const MainSearchBar = () => {
 
   const [skill, setSkill] = useState(localSkill);
   const [experience, setExperience] = useState(localExperience);
-  const [location, setLocation] = useState(localLocation);
+  const [country, setCountry] = useState(localCountry);
   const [company, setCompany] = useState(localCompany);
   const [city, setCity] = useState(localCity);
 
@@ -53,12 +53,12 @@ const MainSearchBar = () => {
     dispatch(searchSliceActions.addExperienceFilter(experience));
   };
 
-  const onLocationChangeHandler = (
+  const onCountryChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const location = event.target.value;
-    setLocation(location);
-    dispatch(searchSliceActions.addLocationFilter(location));
+    const country = event.target.value;
+    setCountry(country);
+    dispatch(searchSliceActions.addCountryFilter(country));
   };
 
   const onCompanyChangeHandler = (
@@ -81,7 +81,7 @@ const MainSearchBar = () => {
     const searchTerms: SearchType = {
       skill,
       experience,
-      location,
+      country,
       company,
       city,
     };
@@ -95,7 +95,7 @@ const MainSearchBar = () => {
       skill !== "" ||
       experience !== "" ||
       !isNaN(+experience) ||
-      location !== "" ||
+      country !== "" ||
       company !== "" ||
       city !== ""
     ) {
@@ -139,9 +139,9 @@ const MainSearchBar = () => {
           </Form.Select>
           <Form.Control
             type="text"
-            placeholder="Enter location"
-            onChange={onLocationChangeHandler}
-            value={location}
+            placeholder="Enter Country"
+            onChange={onCountryChangeHandler}
+            value={country}
           />
           <Button variant="primary" type="submit">
             Search

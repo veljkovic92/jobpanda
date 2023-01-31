@@ -13,7 +13,7 @@ const Results = () => {
   const jobsMap =
     searchTerms.skill === "" &&
     searchTerms.experience === "" &&
-    searchTerms.location === "" &&
+    searchTerms.country === "" &&
     searchTerms.company === "" &&
     searchTerms.city === "" ? (
       <AnyJobItem />
