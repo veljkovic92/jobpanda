@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useForm, SubmitHandler } from "react-hook-form";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  updatePhoneNumber,
+} from "firebase/auth";
+
+import classes from "./RegisterForm.module.scss";
+import { useNavigate } from "react-router-dom";
+import { getDatabase, ref, set } from "firebase/database";
 
 type Inputs = {
   name: string;
@@ -10,44 +20,83 @@ type Inputs = {
   phone: number;
 };
 
+type UserData = {
+  userId: string;
+  name: string;
+  email: string;
+  phoneNumber: number;
+};
+
+const writeUserData = (userData: UserData) => {
+  const { userId, name, email, phoneNumber } = userData;
+  const db = getDatabase();
+  console.log(db);
+  
+  set(ref(db, "users/" + userId), {
+    username: name,
+    email: email,
+    phone_number: phoneNumber,
+  });
+};
+// Find the way to also update user's phoneNumber by passing the one from data. You should also try managing the token expiry through Firebase without writting the code manually (user object returns reloadListener, so there might be the way to do all of the auth logic inside firebase.)
+
+// Trebas da napravis da se na uspesan register odmah skladisti user na firebase database i na redux store, kao i token da krece odmah sa expiry. Kad se klikne na sign out ili istekne token odmah se brise state iz redux i menja isLoggedIn na false. Na  uspesan sign-in se uporedjuje user id sa onim iz database da bi se eventualno povukao info za phone i ostale i odmah se store u redux store. Redux state menja UI u odnosu da li je user logged in ili nije.
 const RegisterForm = () => {
+  const navigate = useNavigate();
+
+  const onRegisterFormSubmit = async (data: Inputs) => {
+    const { name, email, password, phone } = data;
+    const auth = getAuth();
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      if (user) {
+        await updateProfile(user, {
+          displayName: name,
+        });
+        console.log("updated");
+        // ovde Redirect na neku stranu kao sto je profil (navigate)
+        navigate("/");
+
+        const userData = {
+          userId: user.uid,
+          name: name,
+          email: email,
+          phoneNumber: phone,
+        };
+
+        writeUserData(userData);
+        // onda na profile mora da se doda broj telefona i druge rute ne rade (kroz Database storage of user that logged in)
+        // ...
+      }
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage + errorCode);
+    }
+  };
+
   const {
     register,
     handleSubmit,
     watch,
 
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm<Inputs>({ mode: "all" });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => onRegisterFormSubmit(data);
 
   const validatePassword = (value: string) => {
     return value === watch("password") ? true : "Passwords do not match";
   };
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [number, setNumber] = useState("");
-
-  // const onNameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setName(event.target.value);
-  // };
-
-  // const onEmailChangeHandler = () => {
-
-  // };
-
-  // const onPasswordChangeHandler = () => {};
-
-  // const onConfirmPasswordChangeHandler = () => {};
-
-  // const onAddNumberChangeHandler = () => {};
-
-  // const onFormSubmitHandler = () => {};
-  console.log(watch("name")); // watch input value by passing the name of it
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Your Full Name</Form.Label>
         <Form.Control
@@ -56,10 +105,12 @@ const RegisterForm = () => {
           {...register("name", { required: true, minLength: 3 })}
         />
         {errors.name && errors.name.type === "minLength" && (
-          <p>The name must be at least 3 characters long</p>
+          <p className={classes["form--error"]}>
+            The name must be at least 3 characters long
+          </p>
         )}
         {errors.name && errors.name.type === "required" && (
-          <p>The name is required</p>
+          <p className={classes["form--error"]}>The name is required</p>
         )}
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -75,10 +126,12 @@ const RegisterForm = () => {
         />
 
         {errors.email && errors.email.type === "required" && (
-          <p>The email is required</p>
+          <p className={classes["form--error"]}>Email is required</p>
         )}
         {errors.email && errors.email.type === "pattern" && (
-          <p>Please enter a valid email address</p>
+          <p className={classes["form--error"]}>
+            Please enter a valid email address
+          </p>
         )}
       </Form.Group>
 
@@ -87,13 +140,16 @@ const RegisterForm = () => {
         <Form.Control
           type="password"
           placeholder="Password"
+          autoComplete="new-password"
           {...register("password", { required: true, minLength: 6 })}
         />
         {errors.password && errors.password.type === "minLength" && (
-          <p>The password must be at least 6 characters long</p>
+          <p className={classes["form--error"]}>
+            Password must be at least 6 characters long
+          </p>
         )}
         {errors.password && errors.password.type === "required" && (
-          <p>The password is required</p>
+          <p className={classes["form--error"]}>Password is required</p>
         )}
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
@@ -101,6 +157,7 @@ const RegisterForm = () => {
         <Form.Control
           type="password"
           placeholder="Confirm Password"
+          autoComplete="new-password"
           {...register("confirmPassword", {
             required: true,
             validate: validatePassword,
@@ -108,11 +165,15 @@ const RegisterForm = () => {
         />
         {errors.confirmPassword &&
           errors.confirmPassword.message === "Passwords do not match" && (
-            <p>{errors.confirmPassword.message}</p>
+            <p className={classes["form--error"]}>
+              {errors.confirmPassword.message}
+            </p>
           )}
         {errors.confirmPassword &&
           errors.confirmPassword.type === "required" && (
-            <p>The confirmed password is required</p>
+            <p className={classes["form--error"]}>
+              Confirmed password is required
+            </p>
           )}
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPhone">
@@ -124,7 +185,7 @@ const RegisterForm = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" disabled={!isDirty || !isValid}>
         Submit
       </Button>
     </Form>

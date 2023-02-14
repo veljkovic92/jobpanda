@@ -16,6 +16,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import { initializeApp } from "firebase/app";
+import userSlice from "./user-slice";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -43,6 +44,7 @@ export const rootReducers = combineReducers({
   companies: companiesSlice.reducer,
   jobs: jobsSlice.reducer,
   search: searchSlice.reducer,
+  user: userSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

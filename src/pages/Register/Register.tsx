@@ -1,11 +1,12 @@
 import React from "react";
 import { Form } from "react-bootstrap";
+import classes from "./Register.module.scss";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
 
 const Register = () => {
   return (
-    <main>
-      <section>
+    <main className={classes.register}>
+      <section className={classes["register__left"]}>
         <h2>On Register you can</h2>
         <ul>
           <li>Build your profile and let recruiters find you</li>
@@ -13,7 +14,7 @@ const Register = () => {
           <li>Find a job and grow your career</li>
         </ul>
       </section>
-      <section>
+      <section className={classes["register__right"]}>
         <RegisterForm />
       </section>
     </main>

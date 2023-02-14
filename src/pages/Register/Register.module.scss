@@ -1,0 +1,13 @@
+.register {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__left {
+    flex-basis: 35%;
+  }
+
+  &__right {
+    flex-basis: 55%;
+  }
+}

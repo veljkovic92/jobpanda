@@ -2,8 +2,19 @@ import { Link, NavLink } from "react-router-dom";
 import classes from "./Header.module.scss";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import { getAuth, signOut } from "firebase/auth";
+import { useIdToken } from "react-firebase-hooks/auth";
 
 const Header = () => {
+  const auth = getAuth();
+  const [user, loading, error] = useIdToken(auth);
+
+  const onSignOutHandler = () => {
+    signOut(auth);
+    console.log(user);
+    
+  };
+
   return (
     <section className={classes.header}>
       <div className={classes["header__header-left"]}>
@@ -50,23 +61,40 @@ const Header = () => {
           JobPanda
         </NavLink>
       </div>
+
       <div className={classes["header__header-right"]}>
-        <NavLink to="/login">
-          <Button
-            variant="outline-primary"
-            className={classes["header__header-right__button"]}
-          >
-            Login
-          </Button>
-        </NavLink>
-        <NavLink to="/register">
-          <Button
-            variant="outline-danger"
-            className={classes["header__header-right__button"]}
-          >
-            Register
-          </Button>
-        </NavLink>
+        {!user && (
+          <NavLink to="/login">
+            <Button
+              variant="outline-primary"
+              className={classes["header__header-right__button"]}
+            >
+              Login
+            </Button>
+          </NavLink>
+        )}
+        {!user && (
+          <NavLink to="/register">
+            <Button
+              variant="outline-danger"
+              className={classes["header__header-right__button"]}
+            >
+              Register
+            </Button>
+          </NavLink>
+        )}
+
+        {user && (
+          <NavLink to="/">
+            <Button
+              variant="outline-danger"
+              className={classes["header__header-right__button"]}
+              onClick={onSignOutHandler}
+            >
+              Sign Out
+            </Button>
+          </NavLink>
+        )}
 
         <Dropdown>
           <Dropdown.Toggle
