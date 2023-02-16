@@ -12,7 +12,6 @@ const Header = () => {
   const onSignOutHandler = () => {
     signOut(auth);
     console.log(user);
-    
   };
 
   return (
@@ -80,6 +79,17 @@ const Header = () => {
               className={classes["header__header-right__button"]}
             >
               Register
+            </Button>
+          </NavLink>
+        )}
+
+        {user && (
+          <NavLink to="/profile">
+            <Button
+              variant="outline-danger"
+              className={classes["header__header-right__button"]}
+            >
+              Profile
             </Button>
           </NavLink>
         )}

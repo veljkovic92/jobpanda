@@ -31,7 +31,7 @@ const writeUserData = (userData: UserData) => {
   const { userId, name, email, phoneNumber } = userData;
   const db = getDatabase();
   console.log(db);
-  
+
   set(ref(db, "users/" + userId), {
     username: name,
     email: email,
@@ -70,7 +70,7 @@ const RegisterForm = () => {
           email: email,
           phoneNumber: phone,
         };
-
+        // premesti writeUserData funkciju u helpers functions folder i napravi profile page i izlistaj info tamo kroz uporedjivanje ulogovanog user-a i info koji postoji na database
         writeUserData(userData);
         // onda na profile mora da se doda broj telefona i druge rute ne rade (kroz Database storage of user that logged in)
         // ...

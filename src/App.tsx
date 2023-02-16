@@ -16,6 +16,7 @@ import { jobsSliceActions } from "./store/jobs-slice";
 import allJobsList from "./helpers/allJobsList";
 import Companies from "./pages/Companies/Companies";
 import Register from "./pages/Register/Register";
+import Profile from "./pages/Profile/Profile";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/companies" element={<Companies />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Layout>
     </div>
