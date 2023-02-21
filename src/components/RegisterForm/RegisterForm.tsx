@@ -25,6 +25,10 @@ type UserData = {
   name: string;
   email: string;
   phoneNumber: number;
+  profession?: string;
+  experience?: string;
+  country?: string;
+  city?: string;
 };
 
 const writeUserData = (userData: UserData) => {

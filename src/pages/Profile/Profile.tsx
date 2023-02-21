@@ -7,6 +7,7 @@ import profilePhoto from "../../assets/profilephoto.png";
 import Modal from "react-modal";
 import { Button, Form } from "react-bootstrap";
 import { AiFillCloseCircle } from "react-icons/ai";
+import ProfileForm from "../../components/ProfileForm/ProfileForm";
 
 const customStyles = {
   content: {
@@ -138,6 +139,9 @@ const Profile = () => {
               </Form>
             </Modal>
           </div>
+        </section>
+        <section>
+          <ProfileForm />
         </section>
       </main>
     );
