@@ -3,16 +3,15 @@ import { Company } from "../store/companies-slice";
 import { SearchType } from "../store/search-slice";
 import jobPandaLogo from "../assets/jobpanda.png";
 import { IndustryItem } from "../store/jobs-slice";
+import { v4 as uuidv4 } from 'uuid';
 
-const allJobsList = (filteredCompanies: Company[], searchTerms: SearchType) => {
-  console.log(filteredCompanies);
-
+const allJobsList = (filteredCompanies: Company[]) => {
   let industriesArray: IndustryItem[] = [];
 
   filteredCompanies.forEach((company) => {
     company.industries.forEach((industry) => {
       industriesArray.push({
-        id: company.id,
+        id: uuidv4(),
         name: company.name,
         phoneNumber: company.phoneNumber,
         rank: company.alexaRank,
@@ -30,44 +29,6 @@ const allJobsList = (filteredCompanies: Company[], searchTerms: SearchType) => {
         industry: industry,
       });
     });
-  });
-
-  if (searchTerms.experience !== "" && !isNaN(+searchTerms.experience)) {
-    industriesArray = industriesArray.filter(
-      (company) => company.experienceWanted <= +searchTerms.experience
-    );
-  }
-
-  if (searchTerms.skill !== "") {
-    industriesArray = industriesArray.filter((company) =>
-      company.industry.toLowerCase().startsWith(searchTerms.skill.toLowerCase())
-    );
-  }
-
-  if (searchTerms.country !== "") {
-    industriesArray = industriesArray.filter((company) =>
-      company.country
-        .toLowerCase()
-        .startsWith(searchTerms.country.toLowerCase())
-    );
-  }
-
-  if (searchTerms.company !== "") {
-    industriesArray = industriesArray.filter((company) =>
-      company.name.toLowerCase().startsWith(searchTerms.company.toLowerCase())
-    );
-  }
-
-  if (searchTerms.city !== "") {
-    industriesArray = industriesArray.filter((company) =>
-      company.city.toLowerCase().startsWith(searchTerms.city.toLowerCase())
-    );
-  }
-
-  // izbrisi da se uvek shuffle uradi i to dodaj kao opciju na svaki list industrija (sortiranje)
- 
-  const shuffledJobsArray = industriesArray.sort(function () {
-    return Math.random() - 0.5;
   });
 
   return industriesArray;

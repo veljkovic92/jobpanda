@@ -29,6 +29,9 @@ const App = () => {
 
   useEffect(() => {
     fetchCompanies(dispatch);
+
+    const allJobs = allJobsList(companies);
+    dispatch(jobsSliceActions.addAnyJobs(allJobs));
   }, []);
 
   // useEffect(() => {

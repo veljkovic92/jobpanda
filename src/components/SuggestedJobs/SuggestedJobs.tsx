@@ -93,10 +93,10 @@ const SuggestedJobs = () => {
 
   return (
     <section className={classes["suggested-jobs"]}>
-      <h2>Jobs you may be interested in</h2>
+      <h2>Jobs that match your profession</h2>
       <Carousel responsive={responsive}>
         {random5.length === 0 ? (
-          <p>No jobs that tightly match your profession were found.</p>
+          <p>No jobs that match your profession were found.</p>
         ) : (
           random5.map((job) => {
             return (

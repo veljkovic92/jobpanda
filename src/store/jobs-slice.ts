@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import React from "react";
 
 export type IndustryItem = {
-  id: number;
+  id: string;
   name: string;
   phoneNumber: string;
   rank: number;

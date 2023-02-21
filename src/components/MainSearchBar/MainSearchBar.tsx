@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 import { filterCompanies } from "../../helpers/filterCompanies";
 import { jobsSliceActions } from "../../store/jobs-slice";
 import { companiesActions } from "../../store/companies-slice";
-import allJobsList from "../../helpers/allJobsList";
+import specificJobsList from "../../helpers/specificJobsList";
 import { InputGroup } from "react-bootstrap";
 import { GiSettingsKnobs } from "react-icons/gi";
 
@@ -22,6 +22,7 @@ const MainSearchBar = () => {
   const companies = useSelector(
     (state: RootState) => state.companies.companies
   );
+  const anyJobs = useSelector((state:RootState) => state.jobs.anyJobs)
   const {
     skill: localSkill,
     experience: localExperience,
@@ -99,8 +100,8 @@ const MainSearchBar = () => {
       company !== "" ||
       city !== ""
     ) {
-      const specificJobsList = allJobsList(filteredCompanies, searchTerms);
-      dispatch(jobsSliceActions.addSpecificJobs(specificJobsList));
+      const specificJobs = specificJobsList(anyJobs, searchTerms);
+      dispatch(jobsSliceActions.addSpecificJobs(specificJobs));
     }
 
     navigate("/results");

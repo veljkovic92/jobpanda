@@ -9,11 +9,11 @@ export type SearchType = {
 };
 
 const searchTerms: SearchType = {
-  experience: "any",
-  country: "any",
-  skill: "any",
-  company: "any",
-  city: "any",
+  experience: "",
+  country: "",
+  skill: "",
+  company: "",
+  city: "",
 };
 
 const initialState = {

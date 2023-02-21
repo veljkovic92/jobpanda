@@ -1,5 +1,5 @@
 import { filterCompanies } from "../../helpers/filterCompanies";
-import resultsOutput from "../../helpers/allJobsList";
+import resultsOutput from "../../helpers/specificJobsList";
 import classes from "../../pages/Results/Results.module.scss";
 import { useEffect, useState } from "react";
 import Pagination from "react-paginate";
