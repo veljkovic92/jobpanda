@@ -13,8 +13,8 @@ const PaginationItem = (props: { jobs: IndustryItem[] | Company[] }) => {
     (state: RootState) => state.search.searchTerms
   );
 
-  const onJobClickHandler = (index: number) => {
-    navigate(`${index}`);
+  const onJobClickHandler = (id: string) => {
+    navigate(`${id}`);
   };
 
   function isIndustryItemArray(
@@ -28,11 +28,11 @@ const PaginationItem = (props: { jobs: IndustryItem[] | Company[] }) => {
     if (isIndustryItemArray(props.jobs)) {
       console.log("zoki");
 
-      jobsMap = props.jobs.map((industry, index) => (
+      jobsMap = props.jobs.map((industry) => (
         <div
-          key={index}
+          key={industry.id}
           className={classes.job}
-          onClick={() => onJobClickHandler(index)}
+          onClick={() => onJobClickHandler(industry.id)}
         >
           <div className={classes["job__left"]}>
             <div className={classes["job__left__header"]}>

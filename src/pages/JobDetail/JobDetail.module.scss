@@ -1,0 +1,30 @@
+.job-details {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  h1,
+  h3 {
+    text-align: center;
+  }
+
+  &__job-section {
+    &__info {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+
+  &__company-section {
+    &__info {
+      display: flex;
+      justify-content: space-evenly;
+
+      &__left,
+      &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+    }
+  }
+}
