@@ -21,7 +21,7 @@ const SuggestedJobs = () => {
   );
   const anyJobs = useSelector((state: RootState) => state.jobs.anyJobs);
 
-  console.log(companies);
+  console.log(anyJobs);
 
   type MatchingUser = {
     email: string;

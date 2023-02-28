@@ -3,7 +3,7 @@ import { Company } from "../store/companies-slice";
 import { SearchType } from "../store/search-slice";
 import jobPandaLogo from "../assets/jobpanda.png";
 import { IndustryItem } from "../store/jobs-slice";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const allJobsList = (filteredCompanies: Company[]) => {
   let industriesArray: IndustryItem[] = [];
@@ -30,8 +30,11 @@ const allJobsList = (filteredCompanies: Company[]) => {
       });
     });
   });
+  console.log(industriesArray);
 
   return industriesArray;
 };
 
 export default allJobsList;
+
+// I created a new database object "jobs" and should now replace this existing allJobsList which gets called every time the app starts with "jobs". Basically, my app should only pull data about jobs from firebase database. I should change my code accordingly

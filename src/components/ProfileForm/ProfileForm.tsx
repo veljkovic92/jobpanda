@@ -12,7 +12,7 @@ import classes from "./ProfileForm.module.scss";
 type MatchingUser = {
   email: string;
   name: string;
-  phoneNumber?: string;
+  phone_number?: string;
   profession?: string;
   experience?: string;
   country?: string;

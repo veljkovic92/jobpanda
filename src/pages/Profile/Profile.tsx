@@ -24,7 +24,7 @@ Modal.setAppElement("#root");
 
 type MatchingUser = {
   email: string;
-  phoneNumber: string;
+  phone_number: string;
   username: string;
 };
 
@@ -110,7 +110,7 @@ const Profile = () => {
           <div className={classes["profile__main__left"]}>
             <p>Name: {matchingUser.username}</p>
             <p>E-Mail: {matchingUser.email}</p>
-            <p>Phone: {matchingUser.phoneNumber || "No phone number added"}</p>
+            <p>Phone: {matchingUser.phone_number || "No phone number added"}</p>
           </div>
           <div className={classes["profile__main__right"]}>
             <img
