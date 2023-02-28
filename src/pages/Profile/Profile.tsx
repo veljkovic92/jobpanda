@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import { Button, Form } from "react-bootstrap";
 import { AiFillCloseCircle } from "react-icons/ai";
 import ProfileForm from "../../components/ProfileForm/ProfileForm";
+import AppliedJobsList from "../../components/AppliedJobsList/AppliedJobsList";
 
 const customStyles = {
   content: {
@@ -143,6 +144,7 @@ const Profile = () => {
         <section>
           <ProfileForm />
         </section>
+        <AppliedJobsList />
       </main>
     );
   }
