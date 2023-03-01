@@ -25,10 +25,8 @@ const AppliedJobsList = () => {
     get(child(dbRef, `users/${user?.uid}/applied_jobs`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           setAllAppliedJobs(snapshot.val());
         } else {
-          console.log("No data available");
         }
       })
       .catch((error) => {

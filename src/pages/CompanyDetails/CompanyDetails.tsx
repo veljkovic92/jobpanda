@@ -24,7 +24,6 @@ const CompanyDetails = () => {
     const selectedJob = allJobs.find(
       (job) => job.name === selectedCompany?.name && job.industry === event
     );
-    console.log(selectedJob);
 
     navigate(`/jobs/${selectedJob?.id}`);
   };

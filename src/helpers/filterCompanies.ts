@@ -70,7 +70,7 @@ import { SearchType } from "../store/search-slice";
 //       searchedCompanies5 = searchedCompanies4;
 //     }
 //   });
-//   console.log(searchedCompanies5);
+//
 
 //   return searchedCompanies5;
 // };

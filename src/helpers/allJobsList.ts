@@ -30,7 +30,6 @@ const allJobsList = (filteredCompanies: Company[]) => {
       });
     });
   });
-  console.log(industriesArray);
 
   return industriesArray;
 };

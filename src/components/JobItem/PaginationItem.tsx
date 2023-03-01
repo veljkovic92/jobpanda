@@ -26,8 +26,6 @@ const PaginationItem = (props: { jobs: IndustryItem[] | Company[] }) => {
 
   if (props.jobs && props.jobs.length) {
     if (isIndustryItemArray(props.jobs)) {
-      console.log("zoki");
-
       jobsMap = props.jobs.map((industry) => (
         <div
           key={industry.id}

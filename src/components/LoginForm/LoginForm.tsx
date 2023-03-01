@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 // Import the functions you need from the SDKs you need
 
-
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,14 +26,12 @@ const LoginForm = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
 
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
       });
   };
 

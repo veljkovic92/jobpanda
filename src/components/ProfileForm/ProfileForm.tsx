@@ -29,7 +29,6 @@ type ProfileInputs = {
 function ProfileForm() {
   const auth = getAuth();
   const [user, loading, error] = useIdToken(auth);
-  console.log(user);
 
   const dbRef = ref(getDatabase());
 
@@ -39,10 +38,8 @@ function ProfileForm() {
     get(child(dbRef, `users/${user?.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           setMatchingUser(snapshot.val());
         } else {
-          console.log("No data available");
         }
       })
       .catch((error) => {
@@ -92,9 +89,7 @@ function ProfileForm() {
 
       // If update is successful, clear any previous error message
       setUpdateError(null);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const [professionIsClicked, setProfessionIsClicked] = useState(false);
@@ -116,7 +111,7 @@ function ProfileForm() {
       const updates: ProfileInputs = {};
       if (profileInfo === "profession") {
         if (professionValue?.length === 0) {
-          throw new Error("Profession value can't be empty")
+          throw new Error("Profession value can't be empty");
         } else {
           updates[profileInfo] = professionValue;
         }
@@ -130,7 +125,7 @@ function ProfileForm() {
 
       // Update user data in Firebase database with the updates object
       await update(ref(db, "users/" + user!.uid), updates);
-      console.log("uspelo");
+
       setUpdated((prevVal) => prevVal + 1);
 
       if (profileInfo === "profession") {
@@ -146,7 +141,7 @@ function ProfileForm() {
       // If update is successful, clear any previous error message
       setUpdateError(null);
     } catch (error: any) {
-      setUpdateError(error.message)
+      setUpdateError(error.message);
     }
   };
   // dodaj edit fields za svaki profile info field

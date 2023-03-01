@@ -36,10 +36,8 @@ const App = () => {
     get(child(dbRef, `jobs`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log();
           dispatch(jobsSliceActions.addAnyJobs(snapshot.val()));
         } else {
-          console.log("No data available");
         }
       })
       .catch((error) => {

@@ -28,9 +28,8 @@ type ApplicationInputs = {
 const JobApplicationForm = () => {
   const auth = getAuth();
   const [user, loading, error] = useIdToken(auth);
-  console.log(user);
+
   const params = useParams();
-  console.log("posao je " + params.jobId);
 
   const allJobs = useSelector((state: RootState) => state.jobs.anyJobs);
 
@@ -42,10 +41,8 @@ const JobApplicationForm = () => {
     get(child(dbRef, `users/${user?.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           setMatchingUser(snapshot.val());
         } else {
-          console.log("No data available");
         }
       })
       .catch((error) => {
@@ -91,27 +88,17 @@ const JobApplicationForm = () => {
 
       // If update is successful, clear any previous error message
       setUpdateError(null);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const [updateError, setUpdateError] = useState(null);
 
-  console.log(matchingUser?.applied_jobs);
-
   if (matchingUser?.applied_jobs) {
-    console.log(Object.keys(matchingUser.applied_jobs).find((job) => job == params.jobId));
   }
-  
-  
 
   const userHasAppliedForJob =
     matchingUser?.applied_jobs &&
     Object.keys(matchingUser.applied_jobs).find((job) => job == params.jobId);
-
-    
-    
 
   const showFormOrInfo = userHasAppliedForJob ? (
     <Alert key="success" variant="success" className={classes["job-applied"]}>

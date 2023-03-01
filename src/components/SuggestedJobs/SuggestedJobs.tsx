@@ -21,8 +21,6 @@ const SuggestedJobs = () => {
   );
   const anyJobs = useSelector((state: RootState) => state.jobs.anyJobs);
 
-  console.log(anyJobs);
-
   type MatchingUser = {
     email: string;
     phoneNumber: string;
@@ -35,7 +33,6 @@ const SuggestedJobs = () => {
 
   const auth = getAuth();
   const [user, loading, error] = useIdToken(auth);
-  console.log(user);
 
   const dbRef = ref(getDatabase());
 
@@ -43,10 +40,8 @@ const SuggestedJobs = () => {
     get(child(dbRef, `users/${user?.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           setMatchingUser(snapshot.val());
         } else {
-          console.log("No data available");
         }
       })
       .catch((error) => {

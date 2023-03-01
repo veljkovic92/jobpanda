@@ -16,8 +16,6 @@ const JobDetail = () => {
   const params = useParams();
   const allJobs = useSelector((state: RootState) => state.jobs.anyJobs);
 
-  console.log(allJobs);
-
   const selectedJob = allJobs.find((job) => job.id === params.jobId);
 
   return (

@@ -34,7 +34,6 @@ type UserData = {
 const writeUserData = (userData: UserData) => {
   const { userId, name, email, phoneNumber } = userData;
   const db = getDatabase();
-  console.log(db);
 
   set(ref(db, "users/" + userId), {
     username: name,
@@ -64,7 +63,7 @@ const RegisterForm = () => {
         await updateProfile(user, {
           displayName: name,
         });
-        console.log("updated");
+
         // ovde Redirect na neku stranu kao sto je profil (navigate)
         navigate("/");
 
@@ -82,7 +81,6 @@ const RegisterForm = () => {
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorMessage + errorCode);
     }
   };
 

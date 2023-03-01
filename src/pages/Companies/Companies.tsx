@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "../../store";
@@ -10,29 +11,46 @@ const Companies = () => {
   );
 
   return (
-    <ul>
+    <ul className={classes.companies}>
       {companies.map((company, index) => (
-        <li key={company.id} className={classes.company}>
-          <div className={classes["company__left"]}>
-            <div className={classes["company__left__header"]}>
-              <h1>{company.name}</h1>
+        <li key={company.id} className={classes["companies__company"]}>
+          <div className={classes["companies__company__info"]}>
+            <div className={classes["companies__company__info__left"]}>
+              <div
+                className={classes["companies__company__info__left__header"]}
+              >
+                <h2>{company.name}</h2>
+                <div
+                  className={
+                    classes["companies__company__info__left__header__briefing"]
+                  }
+                >
+                  <p>{company.country.nameEn}</p>
+                  <p>{company.city.name}</p>
+                </div>
+              </div>
+              <div className={classes["companies__company__info__left__body"]}>
+                <p>{company.descriptionShort}</p>
+              </div>
+              <div
+                className={classes["companies__company__info__left__actions"]}
+              >
+                <a href={`https://www.${company.domain}`}>
+                  <Button variant="info">Website</Button>
+                </a>
+                <Link to={`${company.id}`}>
+                  <Button variant="info">Details</Button>
+                </Link>
+              </div>
             </div>
-            <div className={classes["company__left__body"]}>
-              <p>{company.descriptionShort}</p>
-            </div>
-            <div className={classes["company__left__footer"]}>
-              <p>{company.country.nameEn}</p>
-              <p>{company.city.name}</p>
-              <p>{company.domain}</p>
+            <div className={classes["companies__company__info__right"]}>
+              <img
+                src={company.logo}
+                className={classes["companies__company__info__right__image"]}
+              />
+              
             </div>
           </div>
-          <div className={classes["company__right"]}>
-            <img
-              src={company.logo}
-              className={classes["company__right__image"]}
-            />
-          </div>
-          <Link to={`${company.id}`}>To Company Details</Link>
         </li>
       ))}
     </ul>

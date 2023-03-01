@@ -11,7 +11,6 @@ const Header = () => {
 
   const onSignOutHandler = () => {
     signOut(auth);
-    console.log(user);
   };
 
   return (

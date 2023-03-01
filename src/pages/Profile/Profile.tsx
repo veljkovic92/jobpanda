@@ -49,7 +49,6 @@ const Profile = () => {
     if (auth.currentUser) {
       updateProfile(auth.currentUser, { photoURL: photoUrl }) // 2. update the user's photo URL
         .then(() => {
-          console.log("Photo URL updated successfully");
           setIsPhotoUrlAdded(true);
           closeModal(); // close the modal after the update is successful
         })
@@ -63,7 +62,6 @@ const Profile = () => {
     if (auth.currentUser) {
       updateProfile(auth.currentUser, { photoURL: "" }) // 2. update the user's photo URL
         .then(() => {
-          console.log("Photo URL deleted successfully");
           setIsPhotoUrlAdded(false);
         })
         .catch((error) => {
@@ -74,7 +72,6 @@ const Profile = () => {
 
   const auth = getAuth();
   const [user, loading, error] = useIdToken(auth);
-  console.log(user);
 
   const dbRef = ref(getDatabase());
 
@@ -82,10 +79,8 @@ const Profile = () => {
     get(child(dbRef, `users/${user?.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           setMatchingUser(snapshot.val());
         } else {
-          console.log("No data available");
         }
       })
       .catch((error) => {
