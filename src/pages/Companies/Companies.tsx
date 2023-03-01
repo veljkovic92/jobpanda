@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { RootState } from "../../store";
 import classes from "./Companies.module.scss";
 
@@ -11,7 +12,7 @@ const Companies = () => {
   return (
     <ul>
       {companies.map((company, index) => (
-        <li key={index} className={classes.company}>
+        <li key={company.id} className={classes.company}>
           <div className={classes["company__left"]}>
             <div className={classes["company__left__header"]}>
               <h1>{company.name}</h1>
@@ -31,6 +32,7 @@ const Companies = () => {
               className={classes["company__right__image"]}
             />
           </div>
+          <Link to={`${company.id}`}>To Company Details</Link>
         </li>
       ))}
     </ul>

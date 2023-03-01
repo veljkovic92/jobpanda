@@ -18,12 +18,11 @@ import Companies from "./pages/Companies/Companies";
 import Register from "./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
 import { getDatabase, ref, child, get } from "firebase/database";
+import CompanyDetails from "./pages/CompanyDetails/CompanyDetails";
 
 const App = () => {
   const dispatch = useDispatch();
-  const companies = useSelector(
-    (state: RootState) => state.companies.companies
-  );
+
   const searchTerms = useSelector(
     (state: RootState) => state.search.searchTerms
   );
@@ -46,9 +45,6 @@ const App = () => {
       .catch((error) => {
         console.error(error);
       });
-
-    
-    
   }, []);
 
   // useEffect(() => {
@@ -67,6 +63,7 @@ const App = () => {
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:jobId" element={<JobDetail />} />
           <Route path="/companies" element={<Companies />} />
+          <Route path="/companies/:companyId" element={<CompanyDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
