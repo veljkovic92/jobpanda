@@ -100,9 +100,18 @@ const JobApplicationForm = () => {
 
   console.log(matchingUser?.applied_jobs);
 
+  if (matchingUser?.applied_jobs) {
+    console.log(Object.keys(matchingUser.applied_jobs).find((job) => job == params.jobId));
+  }
+  
+  
+
   const userHasAppliedForJob =
     matchingUser?.applied_jobs &&
-    Object.keys(matchingUser.applied_jobs).every((job) => job == params.jobId);
+    Object.keys(matchingUser.applied_jobs).find((job) => job == params.jobId);
+
+    
+    
 
   const showFormOrInfo = userHasAppliedForJob ? (
     <Alert key="success" variant="success" className={classes["job-applied"]}>
