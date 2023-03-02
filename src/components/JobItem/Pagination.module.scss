@@ -37,7 +37,7 @@
 }
 
 
-  .company {
+  .item {
     display: flex;
     flex-direction: column;
     background-color: rgb(245, 245, 245);
@@ -110,3 +110,48 @@
     }
   }
 
+
+
+
+  // {jobsMap = props.jobs.map((company) => (
+  //   <li key={company.id} className={classes["company"]}>
+  //     <div className={classes["company__info"]}>
+  //       <div className={classes["company__info__left"]}>
+  //         <div
+  //           className={classes["company__info__left__header"]}
+  //         >
+  //         <h1>{company.industry}</h1>
+  //           <h2>{company.name}</h2>
+  //           <div
+  //             className={
+  //               classes["company__info__left__header__briefing"]
+  //             }
+  //           >
+  //             <p>{company.country}</p>
+  //             <p>{company.city}</p>
+  //           </div>
+  //         </div>
+  //         <div className={classes["company__info__left__body"]}>
+  //           <p>{company.descriptionShort}</p>
+  //         </div>
+  //         <div
+  //           className={classes["company__info__left__actions"]}
+  //         >
+  //           <a href={`https://www.${company.domain}`}>
+  //             <Button variant="info">Website</Button>
+  //           </a>
+  //           <Link to={`${company.id}`}>
+  //             <Button variant="info">Details</Button>
+  //           </Link>
+  //         </div>
+  //       </div>
+  //       <div className={classes["company__info__right"]}>
+  //         <img
+  //           src={company.logo}
+  //           className={classes["company__info__right__image"]}
+  //         />
+          
+  //       </div>
+  //     </div>
+  //   </li>
+  // ))}

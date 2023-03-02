@@ -25,7 +25,7 @@ const Results = () => {
     <>
       <MainSearchBar />
 
-      <div className={classes.jobs}>{jobsMap}</div>
+      <ul className={classes.jobs}>{jobsMap}</ul>
     </>
   );
 };

@@ -1,11 +1,11 @@
 import AnyJobItem from "../../components/JobItem/AnyJobItem";
-import classes from "../../pages/Results/Results.module.scss";
+import classes from "./Jobs.module.scss";
 
 const Jobs = () => {
   return (
-    <div className={classes.jobs}>
+    <ul className={classes.jobs}>
       <AnyJobItem />
-    </div>
+    </ul>
   );
 };
 
