@@ -35,3 +35,78 @@
     }
   }
 }
+
+
+  .company {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(245, 245, 245);
+    padding: 20px 20px;
+    width: 700px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 1px grey;
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+
+      &__left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-basis: 60%;
+
+        &__header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          h2 {
+            text-align: center;
+          }
+
+          &__briefing {
+            display: flex;
+            gap: 5px;
+          }
+        }
+
+        &__body {
+          display: flex;
+        }
+
+        &__actions {
+          display: flex; 
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          button {
+            color: white;
+          }
+         }
+      }
+
+      &__right {
+        flex-basis: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        align-self: stretch;
+        text-align: center;
+
+        &__image {
+          width: 200px;
+          border-radius: 10px;
+          margin: auto;
+        }
+
+        
+        
+        
+        
+      }
+    }
+  }
+
