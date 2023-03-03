@@ -27,4 +27,28 @@
       }
     }
   }
+
+  &__job-desc {
+    &__jobs-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      &__job-item {
+        display: flex;
+        padding: 10px 20px;
+        justify-content: center;
+        align-items: center;
+        background-color: lightgray;
+        cursor: pointer;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: lightblue;
+        }
+      }
+    }
+  }
 }

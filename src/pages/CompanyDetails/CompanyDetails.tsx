@@ -36,9 +36,11 @@ const CompanyDetails = () => {
 
   const selectedCompanyJobMap = selectedCompany?.industries.map((job) => {
     return (
-      <li>
+      <li
+        onClick={() => onRerouteHandler(job)}
+        className={classes["company-details__job-desc__jobs-list__job-item"]}
+      >
         <span>{job}</span>
-        <Button onClick={() => onRerouteHandler(job)}>To Job</Button>
       </li>
     );
   });
@@ -89,7 +91,12 @@ const CompanyDetails = () => {
         <h3>Company Description</h3>
         <p>{selectedCompany?.description}</p>
       </section>
-      <section>{selectedCompanyJobMap}</section>
+      <section>
+        <h3>Available positions:</h3>
+        <ul className={classes["company-details__job-desc__jobs-list"]}>
+          {selectedCompanyJobMap}
+        </ul>
+      </section>
     </div>
   );
 };
