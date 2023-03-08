@@ -1,6 +1,6 @@
 import React from "react";
 import { FaCity, FaInternetExplorer } from "react-icons/fa";
-import { ImPower } from "react-icons/im";
+import { TbMilitaryRank } from "react-icons/tb";
 import { IoIosPeople } from "react-icons/io";
 import { MdLocationSearching, MdOutlineQueryBuilder } from "react-icons/md";
 import { BiCurrentLocation } from "react-icons/bi";
@@ -18,10 +18,16 @@ const JobDetail = () => {
 
   const selectedJob = allJobs.find((job) => job.id === params.jobId);
 
+  const jobName = selectedJob?.industry.replace(/(^|-)([a-z])/g, (match, p1, p2) => {
+    return p1 ? " " + p2.toUpperCase() : p2.toUpperCase();
+  });
+
+
+
   return (
     <div className={classes["job-details"]}>
       <section className={classes["job-details__job-section"]}>
-        <h1>{selectedJob?.industry}</h1>
+        <h1>{jobName}</h1>
         <div className={classes["job-details__job-section__info"]}>
           <span>Experience wanted: {selectedJob?.experienceWanted}</span>
           <span>Location: {selectedJob?.city}</span>
@@ -35,7 +41,7 @@ const JobDetail = () => {
               <BsBuilding /> {selectedJob?.name}
             </span>
             <span>
-              <IoIosPeople /> {selectedJob?.rank}
+              <TbMilitaryRank /> Rank: {selectedJob?.rank}
             </span>
             <span>
               <MdLocationSearching /> {selectedJob?.continent}
@@ -55,10 +61,10 @@ const JobDetail = () => {
               <IoIosPeople /> {selectedJob?.totalEmployeesExact}
             </span>
             <span>
-              <MdOutlineQueryBuilder /> {selectedJob?.yearFounded}
+              <MdOutlineQueryBuilder /> since {selectedJob?.yearFounded}
             </span>
           </div>
-          <div>
+          <div className={classes["job-details__company-section__info__right__image-section"]}>
             <img src={selectedJob?.logo} />
           </div>
         </div>

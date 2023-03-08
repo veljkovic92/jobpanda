@@ -5,6 +5,7 @@ import { BiCurrentLocation } from "react-icons/bi";
 import { BsBuilding } from "react-icons/bs";
 import { FaInternetExplorer } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
+import {TbMilitaryRank} from "react-icons/tb"
 import { MdLocationSearching, MdOutlineQueryBuilder } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
@@ -38,7 +39,7 @@ const CompanyDetails = () => {
     return (
       <li
         onClick={() => onRerouteHandler(job)}
-        className={classes["company-details__job-desc__jobs-list__job-item"]}
+        className={classes["company-details__all-jobs-section__jobs-list__job-item"]}
       >
         <span>{job}</span>
       </li>
@@ -48,7 +49,6 @@ const CompanyDetails = () => {
   return (
     <div className={classes["company-details"]}>
       <section className={classes["company-details__company-section"]}>
-        <h1>Company Info</h1>
         <div className={classes["company-details__company-section__info"]}>
           <div
             className={classes["company-details__company-section__info__left"]}
@@ -57,7 +57,7 @@ const CompanyDetails = () => {
               <BsBuilding /> {selectedCompany?.name}
             </span>
             <span>
-              <IoIosPeople /> {selectedCompany?.alexaRank}
+              <TbMilitaryRank />Rank: {selectedCompany?.alexaRank}
             </span>
             <span>
               <MdLocationSearching /> {selectedCompany?.continent.nameEn}
@@ -82,7 +82,7 @@ const CompanyDetails = () => {
               <MdOutlineQueryBuilder /> {selectedCompany?.yearFounded}
             </span>
           </div>
-          <div>
+          <div className={classes["company-details__company-section__info__right__image-section"]}>
             <img src={selectedCompany?.logo} />
           </div>
         </div>
@@ -91,9 +91,9 @@ const CompanyDetails = () => {
         <h3>Company Description</h3>
         <p>{selectedCompany?.description}</p>
       </section>
-      <section>
+      <section className={classes["company-details__all-jobs-section"]}>
         <h3>Available positions:</h3>
-        <ul className={classes["company-details__job-desc__jobs-list"]}>
+        <ul className={classes["company-details__all-jobs-section__jobs-list"]}>
           {selectedCompanyJobMap}
         </ul>
       </section>

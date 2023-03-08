@@ -33,9 +33,16 @@ const JobAndCompanyItem = (item: IndustryItem | Company) => {
             ) : (
               ""
             )}
-            <h4>
+            {isIndustryItemArray(item) ? (
+              <h5>
               <BsBuilding /> {item.name}
-            </h4>
+            </h5>
+            ) : (
+              <h2>
+              <BsBuilding /> {item.name}
+            </h2>
+            )}
+            
             <div className={classes["item__info__left__header__briefing"]}>
               {!isIndustryItemArray(item) ? (
                 <p>

@@ -24,6 +24,13 @@
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+
+        &__image-section {
+
+          img {
+            border-radius: 10px;
+          }
+        }
       }
     }
   }
