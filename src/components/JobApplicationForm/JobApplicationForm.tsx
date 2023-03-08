@@ -105,13 +105,14 @@ const JobApplicationForm = () => {
       <p>You have successfully applied for this job!</p>
     </Alert>
   ) : (
-    <>
+    <div className={classes["job-apply"]}>
       <h2>Apply for this job:</h2>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="city">
           <Form.Label>Motivational letter</Form.Label>
           <Form.Control
-            type="text"
+            as="textarea"
+            rows={3}
             placeholder="Write your motivational letter"
             {...register("letter")}
           />
@@ -130,7 +131,7 @@ const JobApplicationForm = () => {
           <div className="alert alert-danger mt-3">{updateError}</div>
         )}
       </Form>
-    </>
+    </div>
   );
 
   return showFormOrInfo;

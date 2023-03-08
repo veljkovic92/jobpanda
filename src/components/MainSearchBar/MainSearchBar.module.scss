@@ -1,5 +1,6 @@
 .search {
   margin-top: 20px;
+  height: 80px;
 
   &__form {
     display: flex;
@@ -10,17 +11,26 @@
 
     &__top {
       display: flex;
+      width: 100%;
+      justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
     &__bot {
-      &__more-filters {
-        display: none;
+      
+
+      &__clicked {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
       }
 
-      &__more-filters-clicked {
-        display: flex;
+      &__not-clicked {
+        display: none;
       }
+      
     }
   }
 }

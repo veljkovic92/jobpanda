@@ -22,7 +22,7 @@ const MainSearchBar = () => {
   const companies = useSelector(
     (state: RootState) => state.companies.companies
   );
-  const anyJobs = useSelector((state:RootState) => state.jobs.anyJobs)
+  const anyJobs = useSelector((state: RootState) => state.jobs.anyJobs);
   const {
     skill: localSkill,
     experience: localExperience,
@@ -126,9 +126,13 @@ const MainSearchBar = () => {
             onChange={onExperienceChangeHandler}
           >
             {experience ? (
-              <option disabled selected>{experience} years</option>
+              <option disabled selected>
+                {experience} years
+              </option>
             ) : (
-              <option disabled selected>Select experience</option>
+              <option disabled selected>
+                Select experience
+              </option>
             )}
 
             <option>Any experience</option>
@@ -155,13 +159,11 @@ const MainSearchBar = () => {
         </div>
         <div className={classes["search__form__bot"]}>
           <div
-            className={`${classes["search__form__bot__more-filters"]}
-              ${
-                isMoreFiltersClicked
-                  ? classes["search__form__bot__more-filters-clicked"]
-                  : ""
-              }
-            `}
+            className={
+              isMoreFiltersClicked
+                ? classes["search__form__bot__clicked"]
+                : classes["search__form__bot__not-clicked"]
+            }
           >
             <Form.Control
               type="text"
