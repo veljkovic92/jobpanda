@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router";
 // Import the functions you need from the SDKs you need
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const onEmailChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -26,7 +28,7 @@ const LoginForm = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-
+        navigate("/");
         // ...
       })
       .catch((error) => {

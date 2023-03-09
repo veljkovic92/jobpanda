@@ -51,20 +51,21 @@ const SuggestedJobs = () => {
 
   const [matchingUser, setMatchingUser] = useState<MatchingUser | null>(null);
 
-  let jobsToShowcase: IndustryItem[];
+  const [jobsToShowcase, setJobsToShowcase] = useState<IndustryItem[]>([]);
 
-  if (companies !== undefined) {
-    if (matchingUser) {
-      // ovde stavi da izvlaci isti job kao sto je matchingUser profession
-      jobsToShowcase = [...anyJobs].filter(
-        (job) => matchingUser.profession === job.industry
-      );
-    } else {
-      jobsToShowcase = [...anyJobs];
+  useEffect(() => {
+    if (companies !== undefined) {
+      if (matchingUser) {
+        // ovde stavi da izvlaci isti job kao sto je matchingUser profession
+        setJobsToShowcase(
+          [...anyJobs]
+            .filter((job) => matchingUser.profession === job.industry)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 5)
+        );
+      }
     }
-  }
-
-  const random5 = jobsToShowcase!.sort(() => 0.5 - Math.random()).slice(0, 5);
+  }, [matchingUser]);
 
   const responsive = {
     superLargeDesktop: {
@@ -88,32 +89,32 @@ const SuggestedJobs = () => {
 
   return (
     <section className={classes["suggested-jobs"]}>
-      <h2>Jobs that match your profession</h2>
-      <Carousel responsive={responsive}>
-        {random5.length === 0 ? (
-          <p>No jobs that match your profession were found.</p>
-        ) : (
-          random5.map((job) => {
-            return (
-              <div key={job.id}>
-                <img src={job.logo || jobPandaLogo} />
-                <h4>{job.industry}</h4>
-                <span>{job.name}</span>
-                <span>
-                  <GiRank3 /> {job.rank}
-                </span>
-                <br />
-                <span>
-                  <GoLocation /> {job.city}
-                </span>
-                <span>
-                  <IoIosPeople /> {job.totalEmployeesExact}
-                </span>
-              </div>
-            );
-          })
-        )}
-      </Carousel>
+      {user && jobsToShowcase.length > 0 && (
+        <>
+          <h1>Jobs that match your profession</h1>
+          <Carousel responsive={responsive}>
+            {jobsToShowcase.map((job) => {
+              return (
+                <div key={job.id}>
+                  <img src={job.logo || jobPandaLogo} />
+                  <h4>{job.industry}</h4>
+                  <span>{job.name}</span>
+                  <span>
+                    <GiRank3 /> {job.rank}
+                  </span>
+                  <br />
+                  <span>
+                    <GoLocation /> {job.city}
+                  </span>
+                  <span>
+                    <IoIosPeople /> {job.totalEmployeesExact}
+                  </span>
+                </div>
+              );
+            })}
+          </Carousel>
+        </>
+      )}
     </section>
   );
 };
